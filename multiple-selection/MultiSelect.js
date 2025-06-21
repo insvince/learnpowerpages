@@ -509,22 +509,27 @@ class MultiSelect {
         if (this.options.listAll === true || this.options.listAll === 'true') {
             this.element.querySelectorAll('.multi-select-option').forEach((option) => {
                 if (option.classList.contains('multi-select-selected')) {
+                    let display = '';
+                    if (this.options.multiColumn && this.options.columns.length > 0) {
+                        display = this.options.columns
+                            .map((col) =>
+                                typeof col === 'string'
+                                    ? option.querySelector(`.multi-select-option-col-${col}`)?.innerText || ''
+                                    : option.querySelector(`.multi-select-option-col-${col.key}`)?.innerText || ''
+                            )
+                            .join(' | ');
+                    } else {
+                        display = option.querySelector('.multi-select-option-text')
+                            ? option.querySelector('.multi-select-option-text').innerHTML
+                            : '';
+                    }
                     header.insertAdjacentHTML(
                         'afterbegin',
-                        `<span class="multi-select-header-option" data-value="${option.dataset.value}">${
-                            option.querySelector('.multi-select-option-text').innerHTML
-                        }</span>`
+                        `<span class="multi-select-header-option" data-value="${option.dataset.value}">${display}</span>`
                     );
                 }
             });
             this._updateHeaderSummaryByWidth(header);
-        } else {
-            if (this.selectedValues.length > 0) {
-                header.insertAdjacentHTML(
-                    'afterbegin',
-                    `<span class="multi-select-header-option">${this.selectedValues.length} selected</span>`
-                );
-            }
         }
         if (header.querySelector('.multi-select-header-option') || header.querySelector('.multi-select-header-more')) {
             if (header.querySelector('.multi-select-header-placeholder')) {
@@ -564,7 +569,8 @@ class MultiSelect {
         if (newOptions.data) {
             this.data = newOptions.data.map((item) => ({
                 ...item,
-                selected: prevSelected.includes(item.value),
+                // selected: prevSelected.includes(item.value),
+                selected: false, // Reset selected state to false
             }));
         }
 
