@@ -138,7 +138,8 @@
 }
 
 .multi-select .multi-select-options .multi-select-option .multi-select-option-text,
-.multi-select .multi-select-options .multi-select-all .multi-select-option-text {
+.multi-select .multi-select-options .multi-select-all .multi-select-option-text,
+.multi-select-option-header .multi-select-option-text {
     box-sizing: border-box;
     flex: 1;
     overflow: hidden;
@@ -200,7 +201,8 @@
 
 .multi-select .multi-select-header,
 .multi-select .multi-select-option,
-.multi-select .multi-select-all {
+.multi-select .multi-select-all,
+.multi-select-option-header {
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
@@ -223,9 +225,13 @@
 }
 
 .multi-select-option-col {
-    display: inline-block;
-    min-width: 100px;
-    padding: 0 8px;
+    display: flex;
+    /* max-width: 100%; */
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    width: calc(100% / 2);
+    /* padding: 0 8px; */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -236,4 +242,17 @@
     font-weight: bold;
     background: #f5f5f5;
     color: #333;
+    height: 100%;
+}
+
+.multi-select-option-header .multi-select-option-radio {
+    border: none !important;
+    font-weight: bold;
+    background: #f5f5f5;
+    color: #333;
+    height: 100%;
+}
+
+.multi-select-option-header {
+    height: 42px;
 }
