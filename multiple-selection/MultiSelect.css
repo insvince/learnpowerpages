@@ -215,7 +215,7 @@
 }
 
 /* .multi-select-option.temp-disable { */
-.multi-select-option.option-disable {
+.multi-select-option.option-disabled {
     border-radius: 0;
     border: none !important;
     opacity: 0.5;

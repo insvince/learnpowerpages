@@ -38,6 +38,9 @@ class MultiSelect {
         // Get the select element (by selector or direct reference)
         this.selectElement = typeof element === 'string' ? document.querySelector(element) : element;
 
+        // Variables for internal state
+        this._disabled = false; // Disabled states
+
         // Allow data-* attributes on the select element to override options
         for (const prop in this.selectElement.dataset) {
             if (this.options[prop] !== undefined) {
@@ -140,6 +143,7 @@ class MultiSelect {
         // Handle option click (select/unselect)
         this.element.querySelectorAll('.multi-select-option').forEach((option) => {
             option.onclick = () => {
+                if (this._isDisabled) return;
                 let selected = true;
                 if (!option.classList.contains('multi-select-selected')) {
                     // Select option
@@ -448,20 +452,40 @@ class MultiSelect {
      * Disable the component (UI only)
      */
     _disable() {
+        this._isDisabled = true;
         const header = this.element.querySelector('.multi-select-header');
-        const isDisable = header.classList.contains('temp-disable');
-        if (isDisable) return;
-        header.classList.add('temp-disable');
+        if (header.classList.contains('option-disabled')) return;
+        header.classList.add('option-disabled');
+
+        // Disable all options and select all
+        this.element.querySelectorAll('.multi-select-option, .multi-select-all').forEach((opt) => {
+            opt.classList.add('option-disabled');
+            opt.style.pointerEvents = 'none';
+        });
+
+        // Disable search input if exists
+        const search = this.element.querySelector('.multi-select-search');
+        if (search) search.disabled = true;
     }
 
     /**
      * Enable the component (UI only)
      */
     _enable() {
+        this._isDisabled = false;
         const header = this.element.querySelector('.multi-select-header');
-        const isDisable = header.classList.contains('temp-disable');
-        if (!isDisable) return;
-        if (isDisable) header.classList.remove('temp-disable');
+        if (!header.classList.contains('option-disabled')) return;
+        header.classList.remove('option-disabled');
+
+        // Enable all options and select all
+        this.element.querySelectorAll('.multi-select-option, .multi-select-all').forEach((opt) => {
+            opt.classList.remove('option-disabled');
+            opt.style.pointerEvents = '';
+        });
+
+        // Enable search input if exists
+        const search = this.element.querySelector('.multi-select-search');
+        if (search) search.disabled = false;
     }
 
     // --- Getters and Setters for properties ---
