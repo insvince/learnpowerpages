@@ -15,19 +15,19 @@ class MultiSelect {
      */
     constructor(element, options = {}) {
         // Default options for the component
-        let defaults = {
+        const defaults = {
             placeholder: 'Select item(s)',
-            max: null, // Maximum number of selections allowed
-            search: true, // Enable search input
-            selectAll: true, // Enable select all option
-            listAll: true, // Show all selected items in header
-            closeListOnItemSelect: false, // Close dropdown on item select
+            max: null,
+            search: true,
+            selectAll: true,
+            listAll: true,
+            closeListOnItemSelect: false,
             name: '',
             width: '',
             height: '',
             dropdownWidth: '',
             dropdownHeight: '',
-            data: [], // Data for options
+            data: [],
             onChange: function () {},
             onSelect: function () {},
             onUnselect: function () {},
@@ -38,8 +38,8 @@ class MultiSelect {
         // Get the select element (by selector or direct reference)
         this.selectElement = typeof element === 'string' ? document.querySelector(element) : element;
 
-        // Variables for internal state
-        this._disabled = false; // Disabled states
+        // Internal state
+        this._isDisabled = false;
 
         // Allow data-* attributes on the select element to override options
         for (const prop in this.selectElement.dataset) {
@@ -83,7 +83,6 @@ class MultiSelect {
      */
     _template() {
         let optionsHTML = '';
-        // Build each option
         for (let i = 0; i < this.data.length; i++) {
             optionsHTML += `
                 <div class="multi-select-option${
@@ -94,7 +93,6 @@ class MultiSelect {
                 </div>
             `;
         }
-        // Build select all option if enabled
         let selectAllHTML = '';
         if (this.options.selectAll === true || this.options.selectAll === 'true') {
             selectAllHTML = `<div class="multi-select-all">
@@ -102,7 +100,6 @@ class MultiSelect {
                 <span class="multi-select-option-text">Select all</span>
             </div>`;
         }
-        // Build the main template
         let template = `
             <div class="multi-select ${this.name}"${this.selectElement.id ? ' id="' + this.selectElement.id + '"' : ''} style="${
             this.width ? 'width:' + this.width + ';' : ''
@@ -139,7 +136,7 @@ class MultiSelect {
      * Attach all event handlers for the component
      */
     _eventHandlers() {
-        let headerElement = this.element.querySelector('.multi-select-header');
+        const headerElement = this.element.querySelector('.multi-select-header');
         // Handle option click (select/unselect)
         this.element.querySelectorAll('.multi-select-option').forEach((option) => {
             option.onclick = () => {
@@ -147,44 +144,27 @@ class MultiSelect {
                 let selected = true;
                 if (!option.classList.contains('multi-select-selected')) {
                     // Select option
-                    if (this.options.max && this.selectedValues.length >= this.options.max) {
-                        return;
-                    }
+                    if (this.options.max && this.selectedValues.length >= this.options.max) return;
                     this.element
                         .querySelector('.multi-select')
                         .insertAdjacentHTML('afterbegin', `<input type="hidden" name="${this.name}[]" value="${option.dataset.value}">`);
-                    this.data.filter((data) => data.value == option.dataset.value)[0].selected = true;
-
+                    this.data.find((data) => data.value == option.dataset.value).selected = true;
                     option.classList.add('multi-select-selected');
+
                     // Show selected items in header if enabled
                     if (this.options.listAll === true || this.options.listAll === 'true') {
-                        if (this.element.querySelector('.multi-select-header-option')) {
-                            let opt = Array.from(this.element.querySelectorAll('.multi-select-header-option')).pop();
-                            opt.insertAdjacentHTML(
-                                'afterend',
-                                `<span class="multi-select-header-option" data-value="${option.dataset.value}">${
-                                    option.querySelector('.multi-select-option-text').innerHTML
-                                }</span>`
-                            );
+                        if (headerElement.querySelector('.multi-select-header-more')) {
+                            // If currently in summary state, just update the summary
+                            this._updateHeaderSummaryByWidth(headerElement);
                         } else {
+                            // Add new option to header
                             headerElement.insertAdjacentHTML(
                                 'afterbegin',
                                 `<span class="multi-select-header-option" data-value="${option.dataset.value}">${
                                     option.querySelector('.multi-select-option-text').innerHTML
                                 }</span>`
                             );
-                        }
-
-                        // If more than 3 selected, show summary
-                        if (this.selectedValues.length > 3) {
-                            if (this.element.querySelector('.multi-select-header-option')) {
-                                this.element.querySelectorAll('.multi-select-header-option').forEach((option) => {
-                                    option.remove();
-                                });
-                            }
-                            if (this.element.querySelector('.multi-select-header-more')) {
-                                this.element.querySelector('.multi-select-header-more').remove();
-                            }
+                            this._updateHeaderSummaryByWidth(headerElement);
                         }
                     }
 
@@ -202,11 +182,11 @@ class MultiSelect {
                 } else {
                     // Unselect option
                     option.classList.remove('multi-select-selected');
-                    this.element
-                        .querySelectorAll('.multi-select-header-option')
-                        .forEach((headerOption) => (headerOption.dataset.value == option.dataset.value ? headerOption.remove() : ''));
+                    this.element.querySelectorAll('.multi-select-header-option').forEach((headerOption) => {
+                        if (headerOption.dataset.value == option.dataset.value) headerOption.remove();
+                    });
                     this.element.querySelector(`input[value="${option.dataset.value}"]`).remove();
-                    this.data.filter((data) => data.value == option.dataset.value)[0].selected = false;
+                    this.data.find((data) => data.value == option.dataset.value).selected = false;
                     selected = false;
 
                     // Update select all state
@@ -217,30 +197,27 @@ class MultiSelect {
                         }
                     }
 
-                    // If less than 4 selected, show all selected in header
-                    if (this.selectedValues.length < 4) {
-                        if (this.element.querySelector('.multi-select-header-more')) {
-                            this.element.querySelector('.multi-select-header-more').remove();
+                    // Dynamic width: update header
+                    if (this.options.listAll === true || this.options.listAll === 'true') {
+                        // Remove summary if exists
+                        if (headerElement.querySelector('.multi-select-header-more')) {
+                            headerElement.querySelector('.multi-select-header-more').remove();
                         }
-                        if (this.options.listAll === true || this.options.listAll === 'true') {
-                            const arrays = Array.from(this.element.querySelectorAll('.multi-select-option')).filter((option) =>
-                                option.classList.contains('multi-select-selected')
+                        // Show all selected options again
+                        const arrays = Array.from(this.element.querySelectorAll('.multi-select-option')).filter((option) =>
+                            option.classList.contains('multi-select-selected')
+                        );
+                        arrays.forEach((itemOption) => {
+                            const currentOption = headerElement.querySelector(`[data-value="${itemOption.dataset.value}"]`);
+                            if (currentOption) return;
+                            headerElement.insertAdjacentHTML(
+                                'afterbegin',
+                                `<span class="multi-select-header-option" data-value="${itemOption.dataset.value}">${
+                                    itemOption.querySelector('.multi-select-option-text').innerHTML
+                                }</span>`
                             );
-                            arrays.forEach((itemOption) => {
-                                const currentOption = this.element
-                                    .querySelector('.multi-select-header')
-                                    .querySelector(`[data-value="${itemOption.dataset.value}"]`);
-                                if (currentOption) return;
-                                this.element
-                                    .querySelector('.multi-select-header')
-                                    .insertAdjacentHTML(
-                                        'afterbegin',
-                                        `<span class="multi-select-header-option" data-value="${itemOption.dataset.value}">${
-                                            itemOption.querySelector('.multi-select-option-text').innerHTML
-                                        }</span>`
-                                    );
-                            });
-                        }
+                        });
+                        this._updateHeaderSummaryByWidth(headerElement);
                     }
                 }
                 // If not listing all, show summary
@@ -295,8 +272,13 @@ class MultiSelect {
                 }
             };
         });
+
         // Toggle dropdown on header click
-        headerElement.onclick = () => headerElement.classList.toggle('multi-select-header-active');
+        headerElement.onclick = () => {
+            if (this._isDisabled) return;
+            headerElement.classList.toggle('multi-select-header-active');
+        };
+
         // Search filter
         if (this.options.search === true || this.options.search === 'true') {
             let search = this.element.querySelector('.multi-select-search');
@@ -309,10 +291,12 @@ class MultiSelect {
                 });
             };
         }
+
         // Select all handler
         if (this.options.selectAll === true || this.options.selectAll === 'true') {
             let selectAllButton = this.element.querySelector('.multi-select-all');
             selectAllButton.onclick = () => {
+                if (this._isDisabled) return;
                 let allSelected = selectAllButton.classList.contains('multi-select-selected');
                 this.element.querySelectorAll('.multi-select-option').forEach((option) => {
                     let dataItem = this.data.find((data) => data.value == option.dataset.value);
@@ -337,12 +321,15 @@ class MultiSelect {
                 }
             };
         }
+
         // Support label click to open dropdown
         if (this.selectElement.id && document.querySelector('label[for="' + this.selectElement.id + '"]')) {
             document.querySelector('label[for="' + this.selectElement.id + '"]').onclick = () => {
+                if (this._isDisabled) return;
                 headerElement.classList.toggle('multi-select-header-active');
             };
         }
+
         // Close dropdown when clicking outside
         document.addEventListener('click', (event) => {
             if (!event.target.closest('.' + this.name) && !event.target.closest('label[for="' + this.selectElement.id + '"]')) {
@@ -352,43 +339,70 @@ class MultiSelect {
     }
 
     /**
+     * Check the total width of all selected options in the header.
+     * If the total width exceeds the visible header width (excluding padding and border),
+     * remove all option tags and show a summary instead.
+     * @param {HTMLElement} headerElement
+     */
+    _updateHeaderSummaryByWidth(headerElement) {
+        // Remove old summary if exists
+        if (headerElement.querySelector('.multi-select-header-more')) {
+            headerElement.querySelector('.multi-select-header-more').remove();
+        }
+        // Calculate the visible width of the header (excluding padding and border)
+        const style = window.getComputedStyle(headerElement);
+        const headerWidth =
+            headerElement.offsetWidth -
+            parseFloat(style.paddingLeft) -
+            parseFloat(style.paddingRight) -
+            parseFloat(style.borderLeftWidth) -
+            parseFloat(style.borderRightWidth);
+
+        // Calculate the total width of all selected option tags
+        const headerOptions = headerElement.querySelectorAll('.multi-select-header-option');
+        let totalWidth = 0;
+        const columnGap = 7; // The gap between each option tag
+        headerOptions.forEach((opt) => (totalWidth += columnGap + opt.offsetWidth));
+
+        // If total width exceeds header width (with a small margin), show summary instead
+        if (totalWidth > headerWidth - 20) {
+            headerOptions.forEach((opt) => opt.remove());
+            headerElement.insertAdjacentHTML(
+                'afterbegin',
+                `<span class="multi-select-header-more">${this.selectedValues.length} selected</span>`
+            );
+        }
+    }
+
+    /**
      * Update the selected items in the UI
      */
     _updateSelected() {
+        const header = this.element.querySelector('.multi-select-header');
         if (this.options.listAll === true || this.options.listAll === 'true') {
             this.element.querySelectorAll('.multi-select-option').forEach((option) => {
                 if (option.classList.contains('multi-select-selected')) {
-                    this.element
-                        .querySelector('.multi-select-header')
-                        .insertAdjacentHTML(
-                            'afterbegin',
-                            `<span class="multi-select-header-option" data-value="${option.dataset.value}">${
-                                option.querySelector('.multi-select-option-text').innerHTML
-                            }</span>`
-                        );
+                    header.insertAdjacentHTML(
+                        'afterbegin',
+                        `<span class="multi-select-header-option" data-value="${option.dataset.value}">${
+                            option.querySelector('.multi-select-option-text').innerHTML
+                        }</span>`
+                    );
                 }
             });
-
-            if (this.selectedValues.length > 3) {
-                this.element
-                    .querySelector('.multi-select-header')
-                    .insertAdjacentHTML(
-                        'afterbegin',
-                        `<span class="multi-select-header-option">${this.selectedValues.length} selected</span>`
-                    );
-            }
+            this._updateHeaderSummaryByWidth(header);
         } else {
             if (this.selectedValues.length > 0) {
-                this.element
-                    .querySelector('.multi-select-header')
-                    .insertAdjacentHTML(
-                        'afterbegin',
-                        `<span class="multi-select-header-option">${this.selectedValues.length} selected</span>`
-                    );
+                header.insertAdjacentHTML(
+                    'afterbegin',
+                    `<span class="multi-select-header-option">${this.selectedValues.length} selected</span>`
+                );
             }
         }
-        if (this.element.querySelector('.multi-select-header-option')) {
-            this.element.querySelector('.multi-select-header-placeholder').remove();
+        if (header.querySelector('.multi-select-header-option') || header.querySelector('.multi-select-header-more')) {
+            if (header.querySelector('.multi-select-header-placeholder')) {
+                header.querySelector('.multi-select-header-placeholder').remove();
+            }
         }
 
         let selectAllButton = this.element.querySelector('.multi-select-all');
@@ -413,12 +427,21 @@ class MultiSelect {
      * @param {Object} newOptions - New options to merge
      */
     _updateOptions(newOptions = {}) {
+        // Save previous selected values
+        const prevSelected = this.selectedValues ? [...this.selectedValues] : [];
+
+        // Merge options
         this.options = Object.assign(this.options, newOptions);
-        // If new data is provided, update the internal data
+
+        // If new data is provided, keep selected if possible
         if (newOptions.data) {
-            this.data = newOptions.data;
+            this.data = newOptions.data.map((item) => ({
+                ...item,
+                selected: prevSelected.includes(item.value),
+            }));
         }
-        // Clear and rebuild the component
+
+        // Re-render component
         this.element.innerHTML = '';
         const newElement = this._template();
         this.element.replaceWith(newElement);
@@ -489,7 +512,6 @@ class MultiSelect {
     }
 
     // --- Getters and Setters for properties ---
-
     get selectedValues() {
         return this.data.filter((data) => data.selected).map((data) => data.value);
     }
