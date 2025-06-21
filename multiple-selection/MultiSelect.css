@@ -148,6 +148,7 @@
     color: inherit;
     font-size: var(--filter-params-font-size);
     line-height: 20px;
+    padding: 0 8px;
 }
 
 .multi-select .multi-select-options .multi-select-option.multi-select-selected .multi-select-option-radio,
@@ -227,11 +228,10 @@
 .multi-select-option-col {
     display: flex;
     /* max-width: 100%; */
-    justify-content: center;
     flex-direction: row;
     align-items: center;
-    width: calc(100% / 2);
-    /* padding: 0 8px; */
+    width: calc(100% / 2 - 16px);
+    padding: 0 8px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -254,5 +254,15 @@
 }
 
 .multi-select-option-header {
+    padding: 4px 12px;
     height: 42px;
+    background: #f5f5f5;
+}
+
+.multi-select-option-header-spacing {
+    margin-right: 14px;
+    height: 16px;
+    width: 16px;
+    /* border: 1px solid #ced4da; */
+    border-radius: 4px;
 }

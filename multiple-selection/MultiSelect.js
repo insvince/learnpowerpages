@@ -23,6 +23,10 @@ const optionsSingleColumn = {
         { value: '1', text: 'Option 1', selected: false },
         { value: '2', text: 'Option 2', selected: false },
         { value: '3', text: 'Option 3', selected: false },
+        { value: '4', text: 'Option 4', selected: false },
+        { value: '5', text: 'Option 5', selected: false },
+        { value: '6', text: 'Option 6', selected: false },
+        { value: '7', text: 'Option 7', selected: false },
     ],
     multiColumn: false,
     columns: [],
@@ -143,8 +147,8 @@ class MultiSelect {
         let optionsHeader = '';
         if (multiColumn && columns.length > 0) {
             optionsHeader = `
-            <div class="multi-select-option multi-select-option-header">
-                <span class="multi-select-option-radio"></span>
+            <div class="multi-select-option-header">
+            <span class="multi-select-option-header-spacing"></span>
                 ${columns
                     .map(
                         (col) =>
@@ -168,7 +172,9 @@ class MultiSelect {
                         ? columns
                               .map(
                                   (col) =>
-                                      `<span class="multi-select-option-col multi-select-option-col-${col}">${data[i][col] || ''}</span>`
+                                      `<span class="multi-select-option-col multi-select-option-col-${col.key}">${
+                                          data[i][col.key] || ''
+                                      }</span>`
                               )
                               .join('')
                         : `<span class="multi-select-option-text">${data[i].html ? data[i].html : data[i].text}</span>`
@@ -180,9 +186,9 @@ class MultiSelect {
         let selectAllHTML = '';
         if (this.options.selectAll === true || this.options.selectAll === 'true') {
             selectAllHTML = `<div class="multi-select-all">
-            <span class="multi-select-option-radio"></span>
-            <span class="multi-select-option-text">Select all</span>
-        </div>`;
+                <span class="multi-select-option-radio"></span>
+                <span class="multi-select-option-text">Select all</span>
+            </div>`;
         }
 
         let template = `
@@ -204,8 +210,8 @@ class MultiSelect {
                         ? '<input type="text" class="multi-select-search" placeholder="Search...">'
                         : ''
                 }
-                ${selectAllHTML}
                 ${optionsHeader}
+                ${selectAllHTML}
                 ${optionsHTML}
             </div>
         </div>
