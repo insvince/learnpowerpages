@@ -317,10 +317,19 @@ class MultiSelect {
             let search = this.element.querySelector('.multi-select-search');
             search.oninput = () => {
                 this.element.querySelectorAll('.multi-select-option').forEach((option) => {
-                    option.style.display =
-                        option.querySelector('.multi-select-option-text').innerHTML.toLowerCase().indexOf(search.value.toLowerCase()) > -1
-                            ? 'flex'
-                            : 'none';
+                    let text = '';
+                    if (multiColumn && columns.length > 0) {
+                        text = columns
+                            .map((col) =>
+                                typeof col === 'string'
+                                    ? option.querySelector(`.multi-select-option-col-${col}`)?.innerText || ''
+                                    : option.querySelector(`.multi-select-option-col-${col.key}`)?.innerText || ''
+                            )
+                            .join(' ');
+                    } else {
+                        text = option.querySelector('.multi-select-option-text').innerHTML;
+                    }
+                    option.style.display = text.toLowerCase().indexOf(search.value.toLowerCase()) > -1 ? 'flex' : 'none';
                 });
             };
         }
