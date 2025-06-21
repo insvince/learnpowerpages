@@ -27,7 +27,9 @@ class MultiSelect {
             height: '',
             dropdownWidth: '',
             dropdownHeight: '',
-            data: [],
+            data: [], // Array of objects with { value, text, selected, html }
+            multiColumn: false, // Add this flag to enable multi-column mode
+            columns: [], // Array of keys for columns, e.g. { key, label }
             onChange: function () {},
             onSelect: function () {},
             onUnselect: function () {},
@@ -79,53 +81,84 @@ class MultiSelect {
 
     /**
      * Build the HTML template for the custom multi-select component
+     * Supports multi-column dropdown if options.multiColumn = true and options.columns is an array of keys
      * @returns {HTMLElement}
      */
     _template() {
+        const { multiColumn, columns = [], data } = this.options;
         let optionsHTML = '';
-        for (let i = 0; i < this.data.length; i++) {
-            optionsHTML += `
-                <div class="multi-select-option${
-                    this.selectedValues.includes(this.data[i].value) ? ' multi-select-selected' : ''
-                }" data-value="${this.data[i].value}">
-                    <span class="multi-select-option-radio"></span>
-                    <span class="multi-select-option-text">${this.data[i].html ? this.data[i].html : this.data[i].text}</span>
-                </div>
-            `;
+
+        // Multi-column header row (optional)
+        let optionsHeader = '';
+        if (multiColumn && columns.length > 0) {
+            optionsHeader = `
+            <div class="multi-select-option multi-select-option-header">
+                <span class="multi-select-option-radio"></span>
+                ${columns
+                    .map(
+                        (col) =>
+                            `<span class="multi-select-option-col multi-select-option-col-${typeof col === 'string' ? col : col.key}">
+                        ${typeof col === 'string' ? col.charAt(0).toUpperCase() + col.slice(1) : col.label}
+                    </span>`
+                    )
+                    .join('')}
+            </div>
+        `;
         }
+
+        // Render each option row
+        for (let i = 0; i < data.length; i++) {
+            const isSelected = this.selectedValues.includes(data[i].value);
+            optionsHTML += `
+            <div class="multi-select-option${isSelected ? ' multi-select-selected' : ''}" data-value="${data[i].value}">
+                <span class="multi-select-option-radio"></span>
+                ${
+                    multiColumn && columns.length > 0
+                        ? columns
+                              .map(
+                                  (col) =>
+                                      `<span class="multi-select-option-col multi-select-option-col-${col}">${data[i][col] || ''}</span>`
+                              )
+                              .join('')
+                        : `<span class="multi-select-option-text">${data[i].html ? data[i].html : data[i].text}</span>`
+                }
+            </div>
+        `;
+        }
+
         let selectAllHTML = '';
         if (this.options.selectAll === true || this.options.selectAll === 'true') {
             selectAllHTML = `<div class="multi-select-all">
-                <span class="multi-select-option-radio"></span>
-                <span class="multi-select-option-text">Select all</span>
-            </div>`;
+            <span class="multi-select-option-radio"></span>
+            <span class="multi-select-option-text">Select all</span>
+        </div>`;
         }
+
         let template = `
-            <div class="multi-select ${this.name}"${this.selectElement.id ? ' id="' + this.selectElement.id + '"' : ''} style="${
+        <div class="multi-select ${this.name}"${this.selectElement.id ? ' id="' + this.selectElement.id + '"' : ''} style="${
             this.width ? 'width:' + this.width + ';' : ''
         }${this.height ? 'height:' + this.height + ';' : ''}">
-                ${this.selectedValues.map((value) => `<input type="hidden" name="${this.name}[]" value="${value}">`).join('')}
-                <div class="multi-select-header" style="${this.width ? 'width:' + this.width + ';' : ''}${
+            ${this.selectedValues.map((value) => `<input type="hidden" name="${this.name}[]" value="${value}">`).join('')}
+            <div class="multi-select-header" style="${this.width ? 'width:' + this.width + ';' : ''}${
             this.height ? 'height:' + this.height + ';' : ''
         }">
-                    <span class="multi-select-header-placeholder">${this.placeholder}</span>
-                    <span class="multi-select-header-max">${
-                        this.options.max ? this.selectedValues.length + '/' + this.options.max : ''
-                    }</span>
-                </div>
-                <div class="multi-select-options" style="${this.options.dropdownWidth ? 'width:' + this.options.dropdownWidth + ';' : ''}${
+                <span class="multi-select-header-placeholder">${this.placeholder}</span>
+                <span class="multi-select-header-max">${this.options.max ? this.selectedValues.length + '/' + this.options.max : ''}</span>
+            </div>
+            <div class="multi-select-options" style="${this.options.dropdownWidth ? 'width:' + this.options.dropdownWidth + ';' : ''}${
             this.options.dropdownHeight ? 'height:' + this.options.dropdownHeight + ';' : ''
         }">
-                    ${
-                        this.options.search === true || this.options.search === 'true'
-                            ? '<input type="text" class="multi-select-search" placeholder="Search...">'
-                            : ''
-                    }
-                    ${selectAllHTML}
-                    ${optionsHTML}
-                </div>
+                ${
+                    this.options.search === true || this.options.search === 'true'
+                        ? '<input type="text" class="multi-select-search" placeholder="Search...">'
+                        : ''
+                }
+                ${selectAllHTML}
+                ${optionsHeader}
+                ${optionsHTML}
             </div>
-        `;
+        </div>
+    `;
         let element = document.createElement('div');
         element.style.width = '100%';
         element.innerHTML = template;
