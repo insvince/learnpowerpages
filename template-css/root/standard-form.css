@@ -1,0 +1,861 @@
+/*  */
+/* Standard form region */
+/*  */
+.crmEntityFormView,
+#EntityFormPanel {
+    border: none;
+}
+
+/* Form secondary container */
+/* .crmEntityFormView>.entity-form,
+#EntityFormPanel>.entity-form {} */
+
+/* Form tab */
+/* #EntityFormPanel>.entity-form>.tab {}
+
+#EntityFormPanel>.entity-form>.tab>.tab-column {}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset {} */
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>legend.section-title {
+    border: none;
+}
+
+/* #EntityFormPanel .tab>.tab-column>div>fieldset>table {}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody {}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr {} */
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td {
+    padding: 0;
+    padding-bottom: 20px;
+}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td[colspan="1"]:first-child {
+    padding-right: 10px;
+}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td[colspan="1"]:nth-child(2) {
+    padding-left: 10px;
+}
+
+/* #EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td>.table-info {} */
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.checkbox-cell>.table-info {
+    padding-left: 5px;
+}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.checkbox-cell>.table-info>label {
+    font-weight: 400;
+}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.boolean-radio-cell span {
+    display: flex;
+    align-items: center;
+}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>.boolean-radio-cell span>input[type="radio"] {
+    margin: 0 5px !important;
+}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>.boolean-radio-cell span>input+label {
+    margin-right: 15px;
+}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>.boolean-radio-cell span>input:checked+label {
+    font-weight: 600
+}
+
+/* #EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td>.table-info>label {}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td>.table-info>.validators {}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td>.control {} */
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td>.control>input {
+    border: 1px solid #ced4da !important;
+    min-height: 38px;
+    padding-left: 10px;
+}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td>.control>textarea {
+    border: 1px solid #ced4da !important;
+    min-height: 38px;
+}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td>.control>select {
+    border: 1px solid #ced4da !important;
+    min-height: 38px;
+}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td>.control .datetimepicker>input {
+    border: 1px solid #ced4da !important;
+    min-height: 38px;
+}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td>.control .datetimepicker>.input-group-addon {
+
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+
+    outline: none;
+}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.money>.control input {
+    border: 1px solid #ced4da !important;
+    min-height: 38px;
+}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.lookup>.control input {
+    border: 1px solid #ced4da !important;
+    min-height: 38px;
+}
+
+/* Clear and lookup button in form */
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.lookup>.control button.btn.btn-default.launchentitylookup,
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.lookup>.control button.btn.btn-default.clearlookupfield {
+    border-color: var(--primary-color-custom);
+    min-height: 38px;
+    width: 50px;
+    color: var(--primary-color-custom);
+    outline: none;
+}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.lookup>.control button.btn.btn-default.launchentitylookup {
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
+
+/* #EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.lookup>.control button.btn.btn-default.clearlookupfield {} */
+
+/* Clear and lookup button in form */
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.lookup>.control button.btn.btn-default.launchentitylookup:hover,
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.lookup>.control button.btn.btn-default.clearlookupfield:hover,
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.lookup>.control button.btn.btn-default.launchentitylookup:focus,
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.lookup>.control button.btn.btn-default.clearlookupfield:focus,
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.lookup>.control button.btn.btn-default.launchentitylookup:focus-visible,
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.lookup>.control button.btn.btn-default.clearlookupfield:focus-visible {
+    border-color: var(--primary-color-custom);
+    background-color: var(--primary-color-custom) !important;
+    color: var(--portalThemeColorCustom4);
+}
+
+/* Clear and lookup button in form */
+/* #EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.lookup>.control button.btn.btn-default.launchentitylookup[disabled],
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.lookup>.control button.btn.btn-default.clearlookupfield[disabled] {} */
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td>.control input:not([disabled], [readonly]):focus,
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td>.control textarea:not([disabled], [readonly]):focus,
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td>.control select:not([disabled], [readonly]):focus {
+    border-color: #808080 !important;
+}
+
+/* #EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.text {}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.textarea {}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.picklist-cell {}
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.subgrid-cell {} */
+
+#EntityFormPanel .tab>.tab-column>div>fieldset>table>tbody>tr>td.subgrid-cell>h3.form-subgrid-heading {
+    display: none;
+}
+
+/*  */
+/* Entitylist region */
+/*  */
+.entitylist {
+    border: none !important;
+}
+
+
+/* td.subgrid-cell>.control>.subgrid>.entity-grid {} */
+
+.entity-grid>.view-toolbar {
+    border: none;
+}
+
+/* .entity-grid>.view-toolbar>.toolbar-actions {}
+
+.entity-grid>.view-toolbar>.toolbar-actions>.view-search {} */
+
+.entity-grid>.view-toolbar>.toolbar-actions>.view-search>input.query {
+    min-height: 38px;
+    border-color: var(--border-disable);
+}
+
+.entity-grid>.view-toolbar>.toolbar-actions>.view-search>input.query:focus {
+    border-color: var(--portalThemeColorCustom15) !important;
+}
+
+/* .entity-grid>.view-toolbar>.toolbar-actions>.view-search>.input-group-btn {} */
+
+.entity-grid>.view-toolbar>.toolbar-actions>.view-search>.input-group-btn>button {
+    border-color: var(--primary-color-custom);
+    min-height: 38px;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0 !important;
+}
+
+.entity-grid>.view-toolbar>.toolbar-actions>.view-search>.input-group-btn>button:hover {
+    background-color: var(--primary-color-custom);
+}
+
+.entity-grid>.view-toolbar>.toolbar-actions>.view-search>.input-group-btn>button>span.fa-search {
+    color: var(--primary-color-custom);
+}
+
+.entity-grid>.view-toolbar>.toolbar-actions>.view-search>.input-group-btn>button:hover>span.fa-search {
+    color: var(--portalThemeColorCustom4);
+}
+
+/* .entity-grid>.view-toolbar>.toolbar-actions>.view-search>.input-group-btn>button>span.fa-search:before {}
+
+.entity-grid>.view-toolbar>.toolbar-actions>.view-search>.input-group-btn>button>span.visually-hidden {}
+
+.entity-grid>.view-toolbar>.toolbar-actions>.input-group {} */
+
+.entity-grid>.view-toolbar>.toolbar-actions>.input-group>a.create-action {
+    min-width: 120px;
+    background-color: var(--primary-color-custom);
+    display: flex;
+    color: var(--portalThemeColorCustom4);
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    min-height: 38px;
+    border-radius: var(--border-radius);
+}
+
+.entity-grid>.view-toolbar>.toolbar-actions>.input-group>a.create-action:hover {
+    background-color: var(--portalThemeColorCustom4);
+    color: var(--primary-color-custom);
+    border-color: var(--primary-color-custom);
+}
+
+.entity-grid>.view-toolbar>.toolbar-actions>.input-group>a.create-action>span.fa {
+    display: none;
+}
+
+.entity-grid>.view-toolbar>.toolbar-actions>.input-group>a.entitylist-download {
+    min-width: 120px;
+    background-color: var(--primary-color-custom);
+    display: flex;
+    color: var(--portalThemeColorCustom4);
+    align-items: center;
+    font-size: 14px;
+    font-family: Arial;
+    justify-content: center;
+    outline: none;
+    min-height: 38px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+}
+
+.entity-grid>.view-toolbar>.toolbar-actions>.input-group>a.entitylist-download:hover {
+    background-color: var(--portalThemeColorCustom4);
+    color: var(--primary-color-custom);
+    border-color: var(--primary-color-custom);
+}
+
+.entity-grid>.view-toolbar>.toolbar-actions>.input-group>a.entitylist-download>span.fa {
+    display: none;
+}
+
+.entity-grid>.view-grid {
+    overflow-x: visible;
+}
+
+.entity-grid>.view-empty,
+.entity-grid>.view-access-denied,
+.entity-grid>.view-error {
+    margin-top: 0;
+}
+
+.modal .entity-grid>.view-loading,
+.entity-grid>.view-loading {
+    position: absolute;
+}
+
+/* Table, subgrid */
+.entity-grid>.view-grid>table {
+    margin-bottom: 0;
+    outline: 1px solid var(--border-disable);
+    border-radius: var(--border-radius);
+}
+
+/* Table head */
+/* .entity-grid>.view-grid>table>thead {} */
+
+/* Header row */
+/* .entity-grid>.view-grid>table>thead>tr {} */
+
+/* Header cell */
+.entity-grid>.view-grid>table>thead>tr>th {
+    background-color: var(--primary-color-custom);
+}
+
+.entity-grid>.view-grid>table>thead>tr>th:first-child {
+    border-top-left-radius: var(--border-radius);
+}
+
+.entity-grid>.view-grid>table>thead>tr>th:last-child {
+    border-top-right-radius: var(--border-radius);
+}
+
+/* Header table */
+.entity-grid>.view-grid>table>thead>tr>th>a {
+    color: var(--portalThemeColorCustom4);
+    text-decoration: none !important;
+    font-weight: 600;
+}
+
+/* Table body */
+/* .entity-grid>.view-grid>table>tbody {}
+
+.entity-grid>.view-grid>table>tbody>tr {}
+
+.entity-grid>.view-grid>table>tbody>tr:last-child {} */
+
+.entity-grid>.view-grid>table>tbody>tr:last-child>td {
+    border-bottom: 0;
+}
+
+.entity-grid>.view-grid>table>tbody>tr:last-child>td:first-child {
+    border-bottom-left-radius: var(--border-radius);
+}
+
+.entity-grid>.view-grid>table>tbody>tr:last-child>td:last-child {
+    border-bottom-right-radius: var(--border-radius);
+}
+
+/* .entity-grid>.view-grid>table>tbody>tr>td {}
+
+.entity-grid>.view-grid>table>tbody>tr>td>a {} */
+
+/* Action dropdown container */
+/* .entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action {} */
+
+/* Action button */
+.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>button.btn-md {
+    border-color: var(--primary-color-custom);
+    border-radius: var(--border-radius);
+}
+
+.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>button.btn-md.show {
+    background-color: var(--primary-color-custom);
+}
+
+.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>button.btn-md:hover,
+.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>button.btn-md:focus {
+    background-color: var(--primary-color-custom);
+}
+
+/* .entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>button.btn-md>span.fa-chevron-down {} */
+
+.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>button.btn-md>span.fa-chevron-down:before {
+    color: var(--primary-color-custom);
+}
+
+.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>button.btn-md:hover>span.fa-chevron-down:before {
+    color: var(--portalThemeColorCustom4);
+}
+
+.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>button.btn-md.show>span.fa-chevron-down:before {
+    color: var(--portalThemeColorCustom4);
+}
+
+/* Dropdown list container */
+/* .entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu {}
+
+.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu.show {}
+
+.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu>li {}
+
+.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu>li {} */
+
+.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu>li>a {
+    text-decoration: none !important;
+}
+
+.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu>li>a:hover,
+.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu>li>a:focus {
+    background-color: transparent;
+    color: var(--portalThemeColorCustom1);
+}
+
+.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu>li:hover>a,
+.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu>li:focus-visible>a {
+    background-color: var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+}
+
+.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu>li>a>span {
+    display: none;
+}
+
+/* Sort arrow icon */
+.entity-grid>.view-grid>table>thead>tr>th>a>span:before {
+    margin-left: 10px;
+}
+
+/* Pagination container */
+.entity-grid>.view-pagination {
+    height: 50px;
+}
+
+/* Page list */
+/* .entity-grid .pagination {} */
+
+/* Page item */
+.entity-grid .pagination>li {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.entity-grid .pagination>li.disabled>a {
+    opacity: 0.5;
+}
+
+.entity-grid .pagination>li.active>a {
+    background-color: var(--primary-color-custom) !important;
+}
+
+/* Hyperlink page item */
+.entity-grid .pagination>li>a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    height: inherit;
+    border-radius: 50%;
+    text-decoration: none !important;
+}
+
+.entity-grid .pagination>li:not(.disabled):hover>a {
+    background-color: var(--primary-color-custom) !important;
+    color: var(--portalThemeColorCustom4) !important;
+}
+
+/*  */
+/* End entitylist region  */
+/*  */
+
+/* td.subgrid-cell>.control>.subgrid>.entity-grid {} */
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar {
+    border: none;
+}
+
+/* td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions {}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions>.view-search {} */
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions>.view-search>input.query {
+    min-height: 38px;
+}
+
+/* td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions>.view-search>.input-group-btn {} */
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions>.view-search>.input-group-btn>button {
+    border-color: var(--primary-color-custom);
+    min-height: 38px;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0 !important;
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions>.view-search>.input-group-btn>button:hover {
+    background-color: var(--primary-color-custom);
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions>.view-search>.input-group-btn>button>span.fa-search {
+    color: var(--primary-color-custom);
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions>.view-search>.input-group-btn>button:hover>span.fa-search {
+    color: var(--portalThemeColorCustom4);
+}
+
+/* td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions>.view-search>.input-group-btn>button>span.fa-search:before {}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions>.view-search>.input-group-btn>button>span.visually-hidden {}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions>.input-group {} */
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions>.input-group>a.create-action {
+    min-width: 120px;
+    background-color: var(--primary-color-custom);
+    display: flex;
+    color: var(--portalThemeColorCustom4);
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    min-height: 38px;
+    border-radius: var(--border-radius);
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions>.input-group>a.create-action:hover {
+    background-color: var(--portalThemeColorCustom4);
+    color: var(--primary-color-custom);
+    border-color: var(--primary-color-custom);
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions>.input-group>a.create-action>span.fa {
+    display: none;
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions>.input-group>a.entitylist-download {
+    min-width: 120px;
+    background-color: var(--primary-color-custom);
+    display: flex;
+    color: var(--portalThemeColorCustom4);
+    align-items: center;
+    font-size: 14px;
+    font-family: Arial;
+    justify-content: center;
+    outline: none;
+    min-height: 38px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions>.input-group>a.entitylist-download:hover {
+    background-color: var(--portalThemeColorCustom4);
+    color: var(--primary-color-custom);
+    border-color: var(--primary-color-custom);
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-toolbar>.toolbar-actions>.input-group>a.entitylist-download>span.fa {
+    display: none;
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid {
+    overflow-x: visible;
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-empty,
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-access-denied,
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-error {
+    margin-top: 0;
+}
+
+.modal .entity-grid>.view-loading,
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-loading {
+    position: absolute;
+}
+
+/* Table, subgrid */
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table {
+    margin-bottom: 0;
+    outline: 1px solid var(--border-disable);
+    border-radius: var(--border-radius);
+}
+
+/* Table head */
+/* td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>thead {} */
+
+/* Header row */
+/* td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>thead>tr {} */
+
+/* Header cell */
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>thead>tr>th {
+    background-color: var(--primary-color-custom);
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>thead>tr>th:first-child {
+    border-top-left-radius: var(--border-radius);
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>thead>tr>th:last-child {
+    border-top-right-radius: var(--border-radius);
+}
+
+/* Header table */
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>thead>tr>th>a {
+    color: var(--portalThemeColorCustom4);
+    text-decoration: none !important;
+    font-weight: 600;
+}
+
+/* Table body */
+/* td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody {}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr {}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr:last-child {} */
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr:last-child>td {
+    border-bottom: 0;
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr:last-child>td:first-child {
+    border-bottom-left-radius: var(--border-radius);
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr:last-child>td:last-child {
+    border-bottom-right-radius: var(--border-radius);
+}
+
+/* td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td {}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>a {} */
+
+/* Action dropdown container */
+/* td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action {} */
+
+/* Action button */
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>button.btn-md {
+    border-color: var(--primary-color-custom);
+    border-radius: var(--border-radius);
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>button.btn-md.show {
+    background-color: var(--primary-color-custom);
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>button.btn-md:hover,
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>button.btn-md:focus {
+    background-color: var(--primary-color-custom);
+}
+
+/* td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>button.btn-md>span.fa-chevron-down {} */
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>button.btn-md>span.fa-chevron-down:before {
+    color: var(--primary-color-custom);
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>button.btn-md:hover>span.fa-chevron-down:before {
+    color: var(--portalThemeColorCustom4);
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>button.btn-md.show>span.fa-chevron-down:before {
+    color: var(--portalThemeColorCustom4);
+}
+
+/* Dropdown list container */
+/* td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu {}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu.show {}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu>li {}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu>li {} */
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu>li>a {
+    text-decoration: none !important;
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu>li>a:hover,
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu>li>a:focus {
+    background-color: transparent;
+    color: var(--portalThemeColorCustom1);
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu>li:hover>a,
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu>li:focus-visible>a {
+    background-color: var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>tbody>tr>td>.dropdown.action>.dropdown-menu>li>a>span {
+    display: none;
+}
+
+/* Sort arrow icon */
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-grid>table>thead>tr>th>a>span:before {
+    margin-left: 10px;
+}
+
+/* Pagination container */
+td.subgrid-cell>.control>.subgrid>.entity-grid>.view-pagination {
+    height: 50px;
+}
+
+/* Page list */
+/* td.subgrid-cell>.control>.subgrid>.entity-grid .pagination {} */
+
+/* Page item */
+td.subgrid-cell>.control>.subgrid>.entity-grid .pagination>li {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid .pagination>li.disabled>a {
+    opacity: 0.5;
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid .pagination>li.active>a {
+    background-color: var(--primary-color-custom) !important;
+}
+
+/* Hyperlink page item */
+td.subgrid-cell>.control>.subgrid>.entity-grid .pagination>li>a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    height: inherit;
+    border-radius: 50%;
+    text-decoration: none !important;
+}
+
+td.subgrid-cell>.control>.subgrid>.entity-grid .pagination>li:not(.disabled):hover>a {
+    background-color: var(--primary-color-custom) !important;
+    color: var(--portalThemeColorCustom4) !important;
+}
+
+/* Validation container */
+/* #EntityFormPanel .validation-summary.alert {} */
+
+/* Validation header */
+#EntityFormPanel .validation-summary.alert h2.validation-header {
+    display: none !important;
+}
+
+/* Validation item lists */
+/* #EntityFormPanel .validation-summary.alert>ul {}
+
+#EntityFormPanel .validation-summary.alert>ul>li {} */
+
+#EntityFormPanel .validation-summary.alert>ul>li>a {
+    color: var(--alert-text-color) !important;
+    text-decoration: none !important;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#EntityFormPanel .validation-summary.alert>ul>li>a:hover {
+    color: var(--alert-text-color-hover) !important;
+}
+
+/* Upload container */
+#EntityFormPanel .file-cell {
+    padding: 0;
+    padding-bottom: 20px;
+}
+
+#EntityFormPanel .file-cell .table-info {
+    font-style: italic;
+    color: var(--alert-text-color-hover);
+}
+
+/* Upload label */
+#EntityFormPanel .file-cell .table-info>#NewAttachFileLabel {
+    font-size: 16px;
+    font-style: normal;
+}
+
+/* Upload button */
+#EntityFormPanel .file-cell .ContainerForFile .buttonForFileUpload #UploadButton {
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    border-radius: var(--border-radius);
+    border-color: var(--primary-color-custom);
+    min-width: 120px;
+    text-decoration: none;
+    min-height: 38px;
+}
+
+#EntityFormPanel .file-cell .ContainerForFile .buttonForFileUpload #UploadButton:hover {
+    background-color: var(--button-background-color-hover);
+    color: var(--button-text-color-hover);
+}
+
+/* Modal to show error when upload */
+/* #EntityFormPanel #ModalToShowErrorForFileSize,
+#EntityFormPanel #ModalToShowErrorForFileLimit,
+#EntityFormPanel #ModalToShowErrorForFileType {} */
+
+/* Modal button */
+/* #EntityFormPanel #ModalToShowErrorForFileSize .modal-footer button.btn,
+#EntityFormPanel #ModalToShowErrorForFileLimit .modal-footer button.btn,
+#EntityFormPanel #ModalToShowErrorForFileType .modal-footer button.btn {} */
+
+/* Captcha cell */
+/* #EntityFormPanel .captcha-cell {} */
+
+/* Captcha container */
+/* #EntityFormPanel .captcha-cell .RadCaptcha {} */
+
+/* Captcha image */
+#EntityFormPanel .captcha-cell .RadCaptcha img {
+    height: 100px !important;
+    width: 360px !important;
+    border: 1px solid var(--border-disable);
+}
+
+/* Refresh radcaptcha */
+#EntityFormPanel .captcha-cell .RadCaptcha .rcRefreshImage,
+#EntityFormPanel .captcha-cell .RadCaptcha .rcCaptchaAudioLink {
+    font-size: 16px;
+    text-decoration: none;
+    color: var(--primary-color-custom);
+    font-weight: 600;
+}
+
+/* Input container */
+#EntityFormPanel .captcha-cell .RadCaptcha p {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+/* Input left */
+#EntityFormPanel .captcha-cell .RadCaptcha p input {
+    border: 1px solid var(--border-disable);
+    border-radius: var(--border-radius);
+    width: 360px;
+    padding-left: 10px;
+    min-height: 38px;
+}
+
+#EntityFormPanel .captcha-cell .RadCaptcha p input:focus {
+    border-color: #808080 !important;
+    outline: none;
+}
+
+/* Label right */
+#EntityFormPanel .captcha-cell .RadCaptcha p label {
+    font-size: 16px;
+}
+
+/* Action buttons */
+#EntityFormPanel .actions {
+    border: none;
+    margin: 0;
+}
+
+/* Form action buttons */
+#EntityFormPanel .actions button,
+#EntityFormPanel .actions input {
+    outline: none;
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    border-color: var(--primary-color-custom);
+    min-width: 120px;
+    min-height: 38px;
+}
+
+/* Form action buttons - hover */
+#EntityFormPanel .actions button:hover,
+#EntityFormPanel .actions input:hover {
+    background-color: var(--button-background-color-hover);
+    color: var(--button-text-color-hover);
+}
+
+@media (max-width: 767px) {
+    .crmEntityFormView .cell {
+        margin-bottom: 0 !important;
+    }
+}
+
+/*  */
+/* End standard form region */
+/*  */

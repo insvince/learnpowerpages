@@ -1,0 +1,23 @@
+/*  */
+/* Footer region */
+/*  */
+footer {
+    height: 75px;
+}
+
+footer>div.footer-bottom {
+    color: var(--footer-text-color);
+    background-color: var(--footer-background-color);
+    height: 100%;
+    padding: 0;
+}
+
+/* footer>div.footer-bottom>div.container>div.row {} */
+
+footer>div.footer-bottom>div.container>div.row>div.text-start>div.xrm-editable-html>div.xrm-attribute-value>p.smallText {
+    color: inherit;
+}
+
+/*  */
+/* End footer region */
+/*  */

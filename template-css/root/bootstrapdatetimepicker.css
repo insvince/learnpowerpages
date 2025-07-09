@@ -1,0 +1,91 @@
+/*  */
+/* Bootstrap datetime picker */
+/*  */
+/* .bootstrap-datetimepicker-widget {} */
+
+/* Bootstrap datetimepicker */
+.bootstrap-datetimepicker-widget table :is(th, td) {
+    white-space: normal;
+}
+
+.bootstrap-datetimepicker-widget table .day {
+    background-color: transparent;
+
+    button {
+        &:hover {
+            background-color: transparent;
+        }
+    }
+}
+
+/*! Datetimepicker selected, today */
+/* .bootstrap-datetimepicker-widget table .day:not(.active, .today) {} */
+
+/* Button outside of date cell */
+.bootstrap-datetimepicker-widget table .day.disabled>button {
+    /* text-decoration: line-through; */
+    cursor: not-allowed;
+    color: var(--portalThemeColorCustom10);
+    background-color: transparent;
+}
+
+/* Set image instead of the symbol that lost the font */
+.bootstrap-datetimepicker-widget table .glyphicon-chevron-left {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='black' viewBox='0 0 16 16'%3E%3Cpath d='M11.354 1.646a.75.75 0 0 1 0 1.06L6.06 8l5.293 5.293a.75.75 0 0 1-1.06 1.06l-6-6a.75.75 0 0 1 0-1.06l6-6a.75.75 0 0 1 1.06 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 1em 1em;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    content: "";
+}
+
+/* Set image instead of the symbol that lost the font */
+.bootstrap-datetimepicker-widget table .glyphicon-chevron-right {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='black' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 1.646a.75.75 0 0 1 1.06 0l6 6a.75.75 0 0 1 0 1.06l-6 6a.75.75 0 0 1-1.06-1.06L10.293 8 4.646 2.354a.75.75 0 0 1 0-1.06z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 1em 1em;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    content: "";
+}
+
+/* Center */
+.bootstrap-datetimepicker-widget table .glyphicon-chevron-left,
+.bootstrap-datetimepicker-widget table .glyphicon-chevron-right {
+    background-position: center;
+}
+
+.bootstrap-datetimepicker-widget table .glyphicon-chevron-left,
+.bootstrap-datetimepicker-widget table .glyphicon-chevron-right,
+.bootstrap-datetimepicker-widget table th.picker-switch,
+.bootstrap-datetimepicker-widget table td.day,
+.bootstrap-datetimepicker-widget table th.dow {
+    padding: 10px;
+}
+
+.bootstrap-datetimepicker-widget table .datepicker-decades span.decade {
+    min-width: 92px;
+    line-height: 54px !important;
+}
+
+/* Current select date */
+.bootstrap-datetimepicker-widget table .active button {
+    color: var(--day-text-color-selected) !important;
+}
+
+.bootstrap-datetimepicker-widget table td span.active {
+    background-color: var(--primary-color-custom) !important;
+    color: var(--portalThemeColorCustom4) !important;
+}
+
+.bootstrap-datetimepicker-widget table td.active,
+.bootstrap-datetimepicker-widget table td.active>button {
+    background-color: var(--primary-color-custom) !important;
+    color: var(--portalThemeColorCustom4) !important;
+}
+
+/*  */
+/* End bootstrap datetime picker region */
+/*  */

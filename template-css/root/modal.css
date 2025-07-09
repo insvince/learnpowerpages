@@ -1,0 +1,265 @@
+/*  */
+/* Modal region */
+/*  */
+/* section.modal {}
+
+section.modal>.modal-dialog {}
+
+section.modal>.modal-dialog>.modal-content {} */
+
+/* Modal header container */
+/* section.modal>.modal-dialog>.modal-content>.modal-header {} */
+
+/* Modal title */
+section.modal>.modal-dialog>.modal-content>.modal-header>h1.modal-title {
+    margin-top: 0;
+}
+
+/* Modal close button container */
+section.modal>.modal-dialog>.modal-content>.modal-header>button.form-close {
+    min-width: unset !important;
+}
+
+section.modal>.modal-dialog>.modal-content>.modal-header>button.form-close:hover {
+    background-color: transparent !important;
+}
+
+/* Modal close icon */
+/* .modal-content>.modal-header>button.form-close>span.visually-hidden {} */
+
+/* Modal close icon */
+.modal-content>.modal-header>button.form-close>span:not(.visually-hidden) {
+    font-size: 28px;
+}
+
+/* Modal close button */
+/* .modal-content>.modal-header>button.form-close {}
+
+section.modal>.modal-dialog>.modal-content>.modal-body {} */
+
+/* Animation loading in subgrid */
+section.modal>.modal-dialog>.modal-content>.modal-body>.form-loading {
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Error message: "We're sorry, an error has occurred." */
+/* .modal-content>.modal-body>.modal-error {} */
+
+.modal-content>.modal-body>.entity-grid {
+    position: relative;
+}
+
+/* Action buttons container */
+/* .modal-content>.modal-body>.entity-grid>.view-toolbar.grid-actions {} */
+
+/* Action left container */
+/* .modal-content>.modal-body>.entity-grid>.view-toolbar.grid-actions>ul.view-select {} */
+
+/* Seleted display */
+/* .modal-content>.modal-body>.entity-grid>.view-toolbar.grid-actions>ul.view-select>li#filterDropdownId {} */
+
+/* Selected toggle button */
+ul.view-select>li#filterDropdownId>a.dropdown-toggle {
+    text-decoration: none !important;
+    outline: none;
+    border: 1px solid var(--border-disable) !important;
+    border-radius: var(--border-radius);
+    height: 38px;
+    margin-left: 0;
+    color: var(--primary-color-custom);
+    font-weight: 600;
+}
+
+/* ul.view-select>li#filterDropdownId>a.dropdown-toggle:hover {} */
+
+/* Selected icon */
+/* ul.view-select>li#filterDropdownId>a.dropdown-toggle>span.fa-list {} */
+
+/* Selected icon */
+/* ul.view-select>li#filterDropdownId>a.dropdown-toggle>span.fa-list::before {} */
+
+/* Selected view title */
+/* ul.view-select>li#filterDropdownId>a.dropdown-toggle>span.title {} */
+
+/* Select view list dropdown */
+ul.view-select>li#filterDropdownId>ul.dropdown-menu {
+    width: 100%;
+}
+
+/* ul.view-select>li#filterDropdownId>ul.dropdown-menu>li {}
+
+ul.view-select>li#filterDropdownId>ul.dropdown-menu>li.active {} */
+
+ul.view-select>li#filterDropdownId>ul.dropdown-menu>li>a.dropdown-item {
+    text-decoration: none !important;
+}
+
+/* ul.view-select>li#filterDropdownId>ul.dropdown-menu>li:hover>a.dropdown-item {} */
+
+ul.view-select>li#filterDropdownId>ul.dropdown-menu>li.active>a.dropdown-item {
+    border-width: 1px;
+    background-color: var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+}
+
+/* ul.view-select>li#filterDropdownId>ul.dropdown-menu>li.active:hover>a.dropdown-item {} */
+
+/* Action right container */
+/* .modal-content>.modal-body>.entity-grid>.view-toolbar.grid-actions>.toolbar-actions {} */
+
+/* Searchbar container */
+/* .modal-content>.modal-body>.entity-grid>.view-toolbar.grid-actions>.toolbar-actions>.view-search.entitylist-search {} */
+
+/* Search input */
+/* .modal-content>.modal-body>.entity-grid>.view-toolbar.grid-actions>.toolbar-actions>.view-search.entitylist-search>input.query {}
+
+.modal-content>.modal-body>.entity-grid>.view-toolbar.grid-actions>.toolbar-actions>.view-search.entitylist-search>.input-group-btn {} */
+
+.modal-content>.modal-body>.entity-grid>.view-toolbar.grid-actions>.toolbar-actions>.view-search.entitylist-search>.input-group-btn>button {
+    min-height: 38px;
+    border-bottom-right-radius: var(--border-radius) !important;
+    border-top-right-radius: var(--border-radius) !important;
+    color: var(--primary-color-custom);
+    border-color: var(--primary-color-custom);
+}
+
+.modal-content>.modal-body>.entity-grid>.view-toolbar.grid-actions>.toolbar-actions>.view-search.entitylist-search>.input-group-btn>button:disabled {
+    background-color: var(--portalThemeColorCustom15);
+    border: 1px solid var(--portalThemeColorCustom15);
+    color: var(--portalThemeColorCustom4);
+}
+
+.modal-content>.modal-body>.entity-grid>.view-toolbar.grid-actions>.toolbar-actions>.view-search.entitylist-search>.input-group-btn>button:hover,
+.modal-content>.modal-body>.entity-grid>.view-toolbar.grid-actions>.toolbar-actions>.view-search.entitylist-search>.input-group-btn>button:active,
+.modal-content>.modal-body>.entity-grid>.view-toolbar.grid-actions>.toolbar-actions>.view-search.entitylist-search>.input-group-btn>button:focus,
+.modal-content>.modal-body>.entity-grid>.view-toolbar.grid-actions>.toolbar-actions>.view-search.entitylist-search>.input-group-btn>button:focus-visible {
+    color: var(--portalThemeColorCustom4) !important;
+    background-color: var(--primary-color-custom) !important;
+}
+
+/* .modal-content>.modal-body>.entity-grid>.view-toolbar.grid-actions>.toolbar-actions>.view-search.entitylist-search>.input-group-btn>button>span.visually-hidden {}
+
+.modal-content>.modal-body>.entity-grid>.view-toolbar.grid-actions>.toolbar-actions>.view-search.entitylist-search>.input-group-btn>button>span.fa-search {}
+
+.modal-content>.modal-body>.entity-grid>.view-toolbar.grid-actions>.toolbar-actions>.view-search.entitylist-search>.input-group-btn>button>span.fa-search:before {} */
+
+.modal-content>.modal-body>.entity-grid>.view-grid {
+    scrollbar-width: thin;
+}
+
+/* .modal-content>.modal-body>.entity-grid>.view-grid>span {}
+
+.modal-content>.modal-body>.entity-grid>.view-grid>table {} */
+
+.modal-content>.modal-body>.entity-grid>.view-grid>table>thead {
+    background-color: var(--primary-color-custom);
+}
+
+/* .modal-content>.modal-body>.entity-grid>.view-grid>table>thead>tr {}
+
+.modal-content>.modal-body>.entity-grid>.view-grid>table>thead>tr>th>span.fa-check {} */
+
+.modal-content>.modal-body>.entity-grid>.view-grid>table>thead>tr>th>span.fa-check:before {
+    color: var(--portalThemeColorCustom4);
+}
+
+/* .modal-content>.modal-body>.entity-grid>.view-grid>table>thead>tr>th>span.visually-hidden {} */
+
+.modal-content>.modal-body>.entity-grid>.view-grid>table>thead>tr>th>a {
+    color: var(--portalThemeColorCustom4);
+    text-decoration: none !important;
+    font-weight: 600;
+}
+
+/* Sort icon */
+/* .modal-content>.modal-body>.entity-grid>.view-grid>table>thead>tr>th>a>span.fa {} */
+
+.modal-content>.modal-body>.entity-grid>.view-grid>table>thead>tr>th>a>span.fa:before {
+    color: var(--subgrid-row-text-color);
+}
+
+/* .modal-content>.modal-body>.entity-grid>.view-grid>table>tbody {}
+
+.modal-content>.modal-body>.entity-grid>.view-grid>table>tbody>tr {}
+
+.modal-content>.modal-body>.entity-grid>.view-grid>table>tbody>tr>td {} */
+
+.modal-content>.modal-body>.entity-grid>.view-grid>table>tbody>tr>td>a {
+    color: var(--primary-color-custom);
+}
+
+/* .modal-content>.modal-body>.entity-grid>.view-pagination {} */
+
+/* Pagination container */
+.modal-content>.modal-body>.entity-grid>.view-pagination {
+    height: 50px;
+}
+
+/* Page list */
+/* .modal-content>.modal-body>.entity-grid .pagination {} */
+
+/* Page item */
+.modal-content>.modal-body>.entity-grid .pagination>li {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content>.modal-body>.entity-grid .pagination>li.disabled>a {
+    opacity: 0.5;
+}
+
+.modal-content>.modal-body>.entity-grid .pagination>li.active>a {
+    background-color: var(--primary-color-custom) !important;
+}
+
+/* Hyperlink page item */
+.modal-content>.modal-body>.entity-grid .pagination>li>a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    height: inherit;
+    border-radius: 50%;
+    text-decoration: none !important;
+}
+
+.modal-content>.modal-body>.entity-grid .pagination>li:not(.disabled):hover>a {
+    background-color: var(--primary-color-custom) !important;
+    color: var(--portalThemeColorCustom4) !important;
+}
+
+/* section.modal>.modal-dialog>.modal-content>.modal-footer {} */
+
+section.modal>.modal-dialog>.modal-content>.modal-footer>button {
+    background-color: var(--primary-color-custom);
+    border: 1px solid var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+    border-radius: var(--border-radius);
+}
+
+section.modal>.modal-dialog>.modal-content>.modal-footer>button:not(:disabled):hover {
+    background-color: var(--background-disable);
+    border: 1px solid var(--primary-color-custom);
+    color: var(--primary-color-custom);
+}
+
+section.modal>.modal-dialog>.modal-content>.modal-footer>button:disabled {
+    background-color: var(--portalThemeColorCustom15);
+    border: 1px solid var(--portalThemeColorCustom15);
+    color: var(--portalThemeColorCustom4);
+}
+
+/* section.modal>.modal-dialog>.modal-content>.modal-footer>button.primary {}
+
+section.modal>.modal-dialog>.modal-content>.modal-footer>button.cancel {}
+
+section.modal>.modal-dialog>.modal-content>.modal-footer>button.remove-value {} */
+
+/*  */
+/* End modal region */
+/*  */

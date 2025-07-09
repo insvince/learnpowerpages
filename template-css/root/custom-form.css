@@ -1,0 +1,140 @@
+/*  */
+/* Custom form region */
+/*  */
+/* Databtable + Jquery + Bootstrap Datetimepicker + JqueryUI */
+/* Check box in custom list */
+.section__list input.dt-select-checkbox {
+    background-color: var(--checkbox-background-color) !important;
+}
+
+/* Heading */
+.section__list h1.section__heading {
+    font-size: 24px !important;
+    text-align: left;
+    font-weight: 700;
+    margin: 0 0 10px;
+}
+
+/* Container action buttons */
+.section__list .section__action-btn {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.section__list .section__action-btn .btn-control {
+    width: 75%;
+}
+
+.section__list .section__action-btn .section-btn-filter {
+    flex: 1;
+    text-align: right;
+}
+
+.section__list .section__action-btn button,
+.section__list .section__action-btn a {
+    height: 40px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    min-width: 132px !important;
+}
+
+/* Container filter params */
+.section__list .section__filter-option .filter-data {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-top: 5px;
+}
+
+.section__list .section__filter-option select#dt-length-0 {
+    margin-right: 20px;
+}
+
+.section__list .section__filter-option .input-group {
+    text-align: left;
+    justify-content: center;
+    flex-wrap: nowrap;
+    min-width: 590px;
+    width: calc(calc(100% / 3) - 10px);
+    margin-right: 8px;
+}
+
+.section__list .section__filter-option .input-group span.input-group-text {
+    min-width: 280px;
+}
+
+.section__list .section__filter-option .input-group input {
+    border: 1px solid var(--border-disable) !important;
+}
+
+.section__list .section__filter-option .input-group input:focus {
+    border-color: var(--input-border-color-focus) !important;
+    box-shadow: var(--shadow-color-focus) !important;
+    outline: transparent !important;
+}
+
+.section__list .section__filter-option .input-group textarea,
+.section__list .section__filter-option .input-group input,
+.section__list .section__filter-option .input-group option,
+.section__list .section__filter-option .input-group select,
+.section__list .section__filter-option .input-group span {
+    font-size: var(--filter-params-font-size);
+}
+
+.section__list .section__filter-option .input-group [disabled] {
+    background-color: var(--background-disable) !important;
+    border: 1px solid var(--border-disable) !important;
+    padding-left: 20px;
+}
+
+/* Searchbox */
+.section__list input#dt-search-0 {
+    margin-left: 10px;
+}
+
+.section__list .section__datatable thead {
+    background-color: var(--button-border-color) !important;
+    color: var(--portalThemeColorCustom4);
+}
+
+.section__list .section__datatable span.dt-column-order:before,
+.section__list .section__datatable span.dt-column-order:after {
+    color: var(--sort-icon-color) !important;
+}
+
+.section__list .section__datatable td.datatable__actions {
+    text-align: center;
+}
+
+.section__list .section__datatable td.datatable__actions .dropdown.action .btn.show {
+    background-color: var(--button-background-color-hover) !important;
+    color: var(--button-text-color-hover);
+}
+
+.section__list .section__datatable td.datatable__actions .dropdown.action ul li a:hover,
+.section__list .section__datatable td.datatable__actions .dropdown.action ul li a:focus,
+.section__list .section__datatable td.datatable__actions .dropdown.action ul li a:active {
+    background-color: var(--button-background-color-hover) !important;
+    color: var(--button-text-color-hover) !important;
+    text-decoration: unset !important;
+}
+
+/* Table - Paginate button */
+.section__list button.dt-paging-button {
+    background-image: none !important;
+    border: transparent !important;
+    font-weight: 700;
+}
+
+.section__list button.dt-paging-button:not(.disabled):hover,
+.section__list button.dt-paging-button:is(.current) {
+    background-color: var(--button-background-color-hover) !important;
+    color: var(--button-text-color-hover) !important;
+    border-radius: 50% !important;
+}
+
+/*  */
+/* End custom form region */
+/*  */

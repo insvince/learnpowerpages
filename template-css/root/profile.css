@@ -1,0 +1,213 @@
+/*  */
+/* Profile region */
+/*  */
+/* .container:has(.nav-profile)>.row>div>.card.profile-info {}
+
+.container:has(.nav-profile)>.row>div>.card.profile-info>.card-body {}
+
+.container:has(.nav-profile)>.row>div>.card.profile-info>.card-body>.row {}
+
+.container:has(.nav-profile)>.row>div>.card.profile-info>.card-body>.row>img {}
+
+.container:has(.nav-profile)>.row>div>.card.profile-info>.card-body>.row>span.userFullName {}
+
+.container:has(.nav-profile) .weblinks.list-group {}
+
+.container:has(.nav-profile) .weblinks.list-group>a.list-group-item {} */
+
+.container:has(.nav-profile) .weblinks.list-group>a.list-group-item:hover {
+    color: var(--button-text-color-hover) !important;
+    background-color: var(--primary-color-custom) !important;
+    text-decoration: none !important;
+    border-color: var(--primary-color-custom);
+}
+
+/* .container:has(.nav-profile) .card.nav-profile {}
+
+.container:has(.nav-profile) .card.nav-profile>.card-header {}
+
+.container:has(.nav-profile) .card.nav-profile>.card-header>.card-title {}
+
+.container:has(.nav-profile) .card.nav-profile>.card-header>.card-title>span.fa-lock {}
+
+.container:has(.nav-profile) .card.nav-profile>.card-header>.card-title>span.fa-lock:before {}
+
+.container:has(.nav-profile) .card.nav-profile>.card-header>.card-title>span.xrm-editable-text {}
+
+.container:has(.nav-profile) .card.nav-profile>.card-header>.card-title>span.xrm-editable-text>.xrm-attribute-value-encoded {}
+
+.container:has(.nav-profile) .card.nav-profile>.list-group.nav-profile {} */
+
+.container:has(.nav-profile) .card.nav-profile>.list-group.nav-profile>a.list-group-item,
+.container:has(.nav-profile) .card.nav-profile>.list-group.nav-profile>a.list-group-item.active,
+.container:has(.nav-profile) .card.nav-profile>.list-group.nav-profile>a.list-group-item:active {
+    background-color: var(--portalThemeColorCustom4);
+    border-color: var(--border-disable);
+    text-decoration: none !important;
+    outline: none;
+}
+
+.container:has(.nav-profile) .card.nav-profile>.list-group.nav-profile>a.list-group-item:nth-child(2n - 1) {
+    border-width: 1px;
+}
+
+.container:has(.nav-profile) .card.nav-profile>.list-group.nav-profile>a.list-group-item:nth-child(2n) {
+    border-top: 0;
+    border-bottom: 0;
+}
+
+.container:has(.nav-profile) .card.nav-profile>.list-group.nav-profile>a.list-group-item.active,
+.container:has(.nav-profile) .card.nav-profile>.list-group.nav-profile>a.list-group-item:active {
+    background-color: var(--primary-color-custom);
+    border-color: var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+}
+
+.container:has(.nav-profile) .card.nav-profile>.list-group.nav-profile>a.list-group-item:hover,
+.container:has(.nav-profile) .card.nav-profile>.list-group.nav-profile>a.list-group-item:focus,
+.container:has(.nav-profile) .card.nav-profile>.list-group.nav-profile>a.list-group-item:focus-visible {
+    color: var(--button-text-color-hover);
+    background-color: var(--primary-color-custom);
+}
+
+/* profile submit update button in form */
+.container:has(.nav-profile) #mainContent .actions #ContentContainer_MainContent_MainContent_ContentBottom_SubmitButton {
+    margin-bottom: 147px;
+    margin-top: 10px;
+    border-color: var(--button-border-color) !important;
+    color: var(--button-text-color) !important;
+    background-color: var(--button-background-color) !important;
+}
+
+.container:has(.nav-profile) #mainContent .actions #ContentContainer_MainContent_MainContent_ContentBottom_SubmitButton:hover {
+    color: var(--button-text-color-hover) !important;
+    background-color: var(--button-background-color-hover) !important;
+}
+
+.container:has(.nav-profile) #mainContent .actions #ContentContainer_MainContent_MainContent_ContentBottom_SubmitButton:disabled {
+    color: var(--input-text-color-disable);
+    border-color: var(--border-disable);
+    background-color: var(--portalThemeColorCustom12) !important;
+}
+
+#ProfileFormView {
+    border-color: var(--portalThemeColorCustom4);
+}
+
+/* #ProfileFormView>.tab {}
+
+#ProfileFormView>.tab>.tab-column {} */
+
+#ProfileFormView>.tab>.tab-column input,
+#ProfileFormView>.tab>.tab-column select,
+#ProfileFormView>.tab>.tab-column textarea {
+    border: 1px solid var(--border-disable);
+    color: var(--portalThemeColorCustom1);
+    border-radius: var(--border-radius);
+}
+
+#ProfileFormView>.tab>.tab-column input:focus,
+#ProfileFormView>.tab>.tab-column input:focus-visible,
+#ProfileFormView>.tab>.tab-column select:focus,
+#ProfileFormView>.tab>.tab-column select:focus-visible,
+#ProfileFormView>.tab>.tab-column textarea:focus,
+#ProfileFormView>.tab>.tab-column textarea:focus-visible {
+    border-color: var(--portalThemeColorCustom11) !important;
+}
+
+#ProfileFormView>.tab>.tab-column input:disabled {
+    color: var(--input-text-color-disable);
+    border-color: var(--border-disable);
+    background-color: var(--portalThemeColorCustom12) !important;
+}
+
+#ProfileFormView>.tab>.tab-column .cell {
+    padding: 0 0 20px;
+}
+
+#ProfileFormView>.tab>.tab-column .cell:first-child {
+    padding-right: 10px;
+}
+
+#ProfileFormView>.tab>.tab-column .cell:nth-child(2) {
+    padding-left: 10px;
+}
+
+#ProfileFormView>.tab>.tab-column .cell:not(:has(.control)) {
+    display: none;
+}
+
+/* #ContentContainer_MainContent_MainContent_ContentBottom_MarketingOptionsPanel {}
+
+#ContentContainer_MainContent_MainContent_ContentBottom_MarketingOptionsPanel .portal-form {} */
+
+#ContentContainer_MainContent_MainContent_ContentBottom_MarketingOptionsPanel .portal-form .form-check {
+    padding-left: 0;
+}
+
+/* .container:has(.nav-profile) div>.actions {} */
+
+.container:has(.nav-profile) div>.actions input,
+.container:has(.nav-profile) div>.actions a {
+    background-color: var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+    border-color: var(--primary-color-custom);
+    border-radius: var(--border-radius);
+    outline: none;
+}
+
+.container:has(.nav-profile) div>.actions input:hover,
+.container:has(.nav-profile) div>.actions a:hover,
+.container:has(.nav-profile) div>.actions input:focus,
+.container:has(.nav-profile) div>.actions a:focus,
+.container:has(.nav-profile) div>.actions input:focus-visible,
+.container:has(.nav-profile) div>.actions a:focus-visible,
+.container:has(.nav-profile) div>.actions input:active,
+.container:has(.nav-profile) div>.actions a:active {
+    background-color: var(--portalThemeColorCustom4);
+    color: var(--primary-color-custom);
+}
+
+/* .container:has(.nav-profile) form {}
+
+.container:has(.nav-profile) form .row {} */
+
+.container:has(.nav-profile) form .row label {
+    max-width: var(--label-width);
+}
+
+.container:has(.nav-profile) form .row input {
+    border-color: var(--border-disable) !important;
+    border-radius: var(--border-radius);
+    outline: none;
+}
+
+.container:has(.nav-profile) form .row input:focus,
+.container:has(.nav-profile) form .row input:focus-visible {
+    border-color: var(--portalThemeColorCustom11) !important;
+}
+
+.container:has(.nav-profile) form .row input:disabled {
+    color: var(--input-text-color-disable);
+    border-color: var(--border-disable);
+    background-color: var(--portalThemeColorCustom12) !important;
+}
+
+.container:has(.nav-profile) form .row button {
+    background-color: var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+    border-color: var(--primary-color-custom);
+    border-radius: var(--border-radius);
+    outline: none;
+}
+
+.container:has(.nav-profile) form .row button:hover,
+.container:has(.nav-profile) form .row button:focus,
+.container:has(.nav-profile) form .row button:focus-visible {
+    background-color: var(--portalThemeColorCustom4);
+    color: var(--primary-color-custom);
+}
+
+/*  */
+/* End profile region */
+/*  */

@@ -1,0 +1,348 @@
+/*  */
+/* Login region */
+/*  */
+/* div#content {} */
+
+/* div#content>ul.nav.nav-tabs.nav-account {} */
+
+/* div#content>ul.nav.nav-tabs.nav-account>li.nav-item {} */
+
+div#content>ul.nav.nav-tabs.nav-account>li.nav-item>a.nav-link {
+    text-decoration: none !important;
+}
+
+div#content>ul.nav.nav-tabs.nav-account>li.nav-item>a.nav-link.active {
+    background-color: var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+}
+
+/* div#content>ul.nav.nav-tabs.nav-account>li.nav-item>a.nav-link.active>span.fa.fa-sign-in {}
+
+div#content>ul.nav.nav-tabs.nav-account>li.nav-item>a.nav-link.active>span.fa.fa-sign-in:before {}
+
+div#content>div#mainContent.page-content {}
+
+div#content>div#mainContent.page-content>.row {}
+
+div#content>div#mainContent.page-content>.row>div {}
+
+div#content>div#mainContent.page-content>.row>div>form {}
+
+div#content>div#mainContent.page-content>.row>div>form>div {} */
+
+div#content>div#mainContent.page-content>.row>div>form>div>button {
+    background-color: var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+    border-radius: var(--border-radius);
+    border-color: var(--primary-color-custom);
+    outline: none;
+}
+
+div#content>div#mainContent.page-content>.row>div>form>div>a {
+    background-color: var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+    border-radius: var(--border-radius);
+    border-color: var(--primary-color-custom);
+}
+
+div#content>div#mainContent.page-content>.row>div>form>div>button:hover,
+div#content>div#mainContent.page-content>.row>div>form>div>a:hover,
+div#content>div#mainContent.page-content>.row>div>form>div>button:focus,
+div#content>div#mainContent.page-content>.row>div>form>div>a:focus,
+div#content>div#mainContent.page-content>.row>div>form>div>button:focus-visible,
+div#content>div#mainContent.page-content>.row>div>form>div>a:focus-visible,
+div#content>div#mainContent.page-content>.row>div>form>div>button:active,
+div#content>div#mainContent.page-content>.row>div>form>div>a:active {
+    background-color: var(--portalThemeColorCustom4);
+    color: var(--primary-color-custom);
+}
+
+/* Left container */
+/* div#content>div#mainContent.page-content>.row>div>form>.portal-form {} */
+
+div#content>div#mainContent.page-content>.row>div>form>div>h2,
+div#content>div#mainContent.page-content>.row>div>form>div>h2#local-login-heading,
+div#content>div#mainContent.page-content>.row>div>form>div>h2#external-login-heading {
+    padding-bottom: 0;
+}
+
+/* .portal-form>h2.login-heading-section#login-heading {}
+
+.portal-form>h2.login-heading-section#login-heading>span.xrm-editable-text {}
+
+.portal-form>h2.login-heading-section#login-heading>span.xrm-editable-text>span.xrm-attribute-value-encoded {}
+
+.portal-form>.validation-summary-valid#loginValidationSummary {}
+
+.portal-form>.validation-summary-valid#loginValidationSummary>ul {}
+
+.portal-form>.validation-summary-valid#loginValidationSummary>ul>li {}
+
+.portal-form>.validation-summary-valid#loginValidationSummary>ul>li>a {}
+
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row {}
+
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>label {}
+
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>label:before {}
+
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>label>span.xrm-editable-text {}
+
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>label>span.xrm-editable-text>span.xrm-attribute-value-encoded {}
+
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div {} */
+
+#mainContent>div.row>div>form>div>div:has(#RememberMe, #submit-signin-local)>div {
+    margin-left: var(--label-width);
+}
+
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>input {
+    border: 1px solid #ced4da !important;
+}
+
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>input:not([disabled], [readonly]):focus,
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>input:not([disabled], [readonly]):focus-visible {
+    border-color: #808080 !important;
+}
+
+/* div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>.checkbox {}
+
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>.checkbox>label {}
+
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>.checkbox>label>input#RememberMe {}
+
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>.checkbox>label>span.xrm-editable-text {}
+
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>.checkbox>label>span.xrm-editable-text>span.xrm-attribute-value-encoded {} */
+
+/* Checkbox */
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>.checkbox>label>input:checked~span {
+    font-weight: 600 !important;
+}
+
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>button {
+    background-color: var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+    border-radius: var(--border-radius);
+    border-color: var(--primary-color-custom);
+    outline: none;
+}
+
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>a {
+    background-color: var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+    border-radius: var(--border-radius);
+    border-color: var(--primary-color-custom);
+    outline: none;
+}
+
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>button:hover,
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>a:hover,
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>button:focus,
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>a:focus,
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>button:focus-visible,
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>a:focus-visible,
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>button:active,
+div#content>div#mainContent.page-content>.row>div>form>.portal-form>.row>div>a:active {
+    background-color: var(--portalThemeColorCustom4) !important;
+    color: var(--primary-color-custom) !important;
+}
+
+/* Right container */
+/* div#content>div#mainContent.page-content>.row>div>form>h2.login-heading-section#external-login-heading {}
+
+div#content>div#mainContent.page-content>.row>div>form>h2.login-heading-section#external-login-heading>span.xrm-editable-text {}
+
+div#content>div#mainContent.page-content>.row>div>form>h2.login-heading-section#external-login-heading>span.xrm-editable-text>span.xrm-attribute-value-encoded {}
+
+div#content>div#mainContent.page-content>.row>div>form>button {}
+
+#ContentContainer_MainContent_MainContent_SecureRegister {}
+
+#ContentContainer_MainContent_MainContent_SecureRegister>.row>div>#ContentContainer_MainContent_MainContent_LocalLogin>.portal-form {} */
+
+#ContentContainer_MainContent_MainContent_LocalLogin>div>h2.login-heading-section,
+#ContentContainer_MainContent_MainContent_ExternalLogin>div>h2.login-heading-section {
+    padding-bottom: 0;
+}
+
+#ContentContainer_MainContent_MainContent_ShowEmail label,
+#ContentContainer_MainContent_MainContent_ShowUserName label,
+#ContentContainer_MainContent_MainContent_SecureRegister>.row>div>#ContentContainer_MainContent_MainContent_LocalLogin>.portal-form>.row label,
+#ContentContainer_MainContent_MainContent_CaptchaRowPlaceHolder label {
+    max-width: var(--label-width);
+}
+
+#ContentContainer_MainContent_MainContent_ShowEmail input,
+#ContentContainer_MainContent_MainContent_ShowUserName input,
+#ContentContainer_MainContent_MainContent_SecureRegister>.row>div>#ContentContainer_MainContent_MainContent_LocalLogin>.portal-form>.row input:not(input#SubmitButton),
+#ContentContainer_MainContent_MainContent_CaptchaRowPlaceHolder input {
+    border: 1px solid #ced4da !important;
+}
+
+#ContentContainer_MainContent_MainContent_ShowEmail input:not([disabled], [readonly]):focus,
+#ContentContainer_MainContent_MainContent_ShowUserName input:not([disabled], [readonly]):focus,
+#ContentContainer_MainContent_MainContent_SecureRegister>.row>div>#ContentContainer_MainContent_MainContent_LocalLogin>.portal-form>.row input:not([disabled], [readonly]):focus,
+#ContentContainer_MainContent_MainContent_CaptchaRowPlaceHolder input:not([disabled], [readonly]):focus {
+    border: 1px solid #808080 !important;
+    /* border-color: #808080 !important; */
+}
+
+#ContentContainer_MainContent_MainContent_SecureRegister>.row>div>#ContentContainer_MainContent_MainContent_LocalLogin>.portal-form>.row input:not([disabled], [readonly])#PasswordTextBox:focus,
+#ContentContainer_MainContent_MainContent_SecureRegister>.row>div>#ContentContainer_MainContent_MainContent_LocalLogin>.portal-form>.row input:not([disabled], [readonly])#ConfirmPasswordTextBox:focus {
+    border: 1px solid #808080 !important;
+}
+
+/* Captcha */
+/* #ContentContainer_MainContent_MainContent_CaptchaControlContainer {}
+
+#ContentContainer_MainContent_MainContent_CaptchaControlContainer .RadCaptcha {} */
+
+#ContentContainer_MainContent_MainContent_CaptchaControlContainer .RadCaptcha img {
+    height: 100px !important;
+    width: 360px !important;
+    border: 1px solid var(--border-disable);
+}
+
+/* Refresh radcaptcha */
+#ContentContainer_MainContent_MainContent_CaptchaControlContainer .RadCaptcha .rcRefreshImage,
+#ContentContainer_MainContent_MainContent_CaptchaControlContainer .RadCaptcha .rcCaptchaAudioLink {
+    font-size: 16px;
+    text-decoration: none;
+    color: var(--primary-color-custom);
+    font-weight: 600;
+}
+
+/* Input container */
+#ContentContainer_MainContent_MainContent_CaptchaControlContainer .RadCaptcha p {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+/* Input left */
+#ContentContainer_MainContent_MainContent_CaptchaControlContainer .RadCaptcha p input {
+    border: 1px solid var(--border-disable);
+    border-radius: var(--border-radius);
+    width: 360px;
+    padding-left: 10px;
+    min-height: 38px;
+}
+
+#ContentContainer_MainContent_MainContent_CaptchaControlContainer .RadCaptcha p input:not([disabled], [readonly]):focus {
+    border-color: #808080 !important;
+    outline: none;
+}
+
+/* Label right */
+#ContentContainer_MainContent_MainContent_CaptchaControlContainer .RadCaptcha p label {
+    font-size: 16px;
+    min-width: 360px;
+}
+
+#ContentContainer_MainContent_MainContent_LocalLogin div:has(>div>input#SubmitButton)>div {
+    margin-left: var(--label-width);
+}
+
+/* Register button */
+#ContentContainer_MainContent_MainContent_LocalLogin input#SubmitButton {
+    background-color: var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+    border-radius: var(--border-radius);
+    border-color: var(--primary-color-custom) !important;
+    outline: none;
+}
+
+#ContentContainer_MainContent_MainContent_LocalLogin input#SubmitButton:hover,
+#ContentContainer_MainContent_MainContent_LocalLogin input#SubmitButton:focus,
+#ContentContainer_MainContent_MainContent_LocalLogin input#SubmitButton:focus-visible {
+    background-color: var(--portalThemeColorCustom4) !important;
+    color: var(--primary-color-custom) !important;
+}
+
+/* #ContentContainer_MainContent_MainContent_ExternalLogin>div>h2.login-heading-section {} */
+
+#ContentContainer_MainContent_MainContent_AzureADRebrandDisclaimer button {
+    background-color: var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+    border-radius: var(--border-radius);
+    border-color: var(--primary-color-custom);
+    outline: none;
+}
+
+#ContentContainer_MainContent_MainContent_ExternalLoginButtons button {
+    background-color: var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+    border-radius: var(--border-radius);
+    border-color: var(--primary-color-custom);
+    outline: none;
+}
+
+#ContentContainer_MainContent_MainContent_AzureADRebrandDisclaimer button:hover,
+#ContentContainer_MainContent_MainContent_ExternalLoginButtons button:hover,
+#ContentContainer_MainContent_MainContent_AzureADRebrandDisclaimer button:focus,
+#ContentContainer_MainContent_MainContent_ExternalLoginButtons button:focus,
+#ContentContainer_MainContent_MainContent_AzureADRebrandDisclaimer button:focus-visible,
+#ContentContainer_MainContent_MainContent_ExternalLoginButtons button:focus-visible,
+#ContentContainer_MainContent_MainContent_AzureADRebrandDisclaimer button:active,
+#ContentContainer_MainContent_MainContent_ExternalLoginButtons button:active {
+    background-color: var(--portalThemeColorCustom4) !important;
+    color: var(--primary-color-custom) !important;
+}
+
+/* div#content>div#mainContent.page-content>form>.portal-form {} */
+
+div#content>div#mainContent.page-content>form>.portal-form>h2.login-heading-section {
+    padding-bottom: 0;
+}
+
+/* div#content>div#mainContent.page-content>form>.portal-form>.validation-summary-valid {} */
+
+/* div#content>div#mainContent.page-content>form>.portal-form>.row {} */
+
+div#content>div#mainContent.page-content>form>.portal-form>.row>div {
+    max-width: calc(100% - var(--label-width));
+}
+
+div#content>div#mainContent.page-content>form>.portal-form>.row>div:has(#submit-redeem-invitation, #RedeemByLogin) {
+    margin-left: var(--label-width);
+}
+
+#mainContent>div.row>div>form>div>div>label,
+div#content>div#mainContent.page-content>form>.portal-form>.row label {
+    width: var(--label-width);
+}
+
+div#content>div#mainContent.page-content>form>.portal-form>.row input#InvitationCode {
+    border: 1px solid var(--border-disable);
+    border-radius: var(--border-radius);
+}
+
+div#content>div#mainContent.page-content>form>.portal-form>.row input:not([disabled], [readonly])#InvitationCode:focus {
+    border-color: #808080 !important;
+    outline: none;
+}
+
+div#content>div#mainContent.page-content>form>.portal-form>.row input:checked~span {
+    font-weight: 600;
+}
+
+div#content>div#mainContent.page-content>form>.portal-form>.row #submit-redeem-invitation {
+    background-color: var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+    border-radius: var(--border-radius);
+    border-color: var(--primary-color-custom);
+    outline: none;
+}
+
+div#content>div#mainContent.page-content>form>.portal-form>.row #submit-redeem-invitation:hover,
+div#content>div#mainContent.page-content>form>.portal-form>.row #submit-redeem-invitation:focus,
+div#content>div#mainContent.page-content>form>.portal-form>.row #submit-redeem-invitation:focus-visible,
+div#content>div#mainContent.page-content>form>.portal-form>.row #submit-redeem-invitation:active {
+    background-color: var(--portalThemeColorCustom4) !important;
+    color: var(--primary-color-custom) !important;
+}
+
+/*  */
+/* #End login region */
+/*  */

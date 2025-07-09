@@ -1,0 +1,66 @@
+/*  */
+/* Root region */
+/*  */
+html,
+.view-grid {
+    scrollbar-width: thin;
+}
+
+/* Hide alert for private site */
+#privateModeText {
+    display: none;
+}
+
+/* Hide breadcrumb */
+.breadcrumb {
+    display: none;
+}
+
+/* Input short line through */
+.text-muted {
+    display: none;
+}
+
+/* Header cell, data cell no-wrap */
+th,
+td {
+    white-space: nowrap;
+}
+
+/* System field */
+.form-control.aspNetDisabled,
+.form-control.readonly {
+    background-color: var(--background-disable) !important;
+    cursor: not-allowed !important;
+    padding-left: 10px !important;
+}
+
+div.container {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+input::placeholder {
+    color: var(--input-text-placeholder-color) !important;
+}
+
+textarea {
+    resize: vertical !important;
+    min-height: 150px !important;
+}
+
+button:disabled {
+    background-color: var(--portalThemeColorCustom15) !important;
+    border: 1px solid var(--portalThemeColorCustom15) !important;
+    color: var(--portalThemeColorCustom4) !important;
+}
+
+/* input:disabled {
+    color: var(--portalThemeColorCustom12) !important;
+    border-color: var(--border-disable) !important;
+    background-color: var(--portalThemeColorCustom12) !important;
+} */
+
+/*  */
+/* End root region */
+/*  */
