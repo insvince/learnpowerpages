@@ -1,3 +1,14 @@
+@import url(./variables.css);
+@import url(./root.css);
+@import url(./header.css);
+@import url(./footer.css);
+@import url(./login.css);
+@import url(./profile.css);
+@import url(./standard-form.css);
+@import url(./custom-form.css);
+@import url(./modal.css);
+@import url(./datetimepicker.css);
+
 /* Template: Starter layout 1 */
 /*  */
 /* Color Variables */
