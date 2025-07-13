@@ -26,6 +26,7 @@ div.alert ul li a {
 
 div.alert ul li a:hover {
     color: var(--alert-text-color-hover) !important;
+    text-decoration: none !important;
 }
 
 /*  */
