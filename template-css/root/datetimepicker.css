@@ -54,15 +54,21 @@
 /* Center */
 .bootstrap-datetimepicker-widget table .glyphicon-chevron-left,
 .bootstrap-datetimepicker-widget table .glyphicon-chevron-right {
+    background-repeat: no-repeat;
+    background-size: 1em 1em;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    content: "";
     background-position: center;
+    /* Thêm trạng thái focus/active */
+    outline: 2px solid var(--primary-color-custom);
 }
 
-.bootstrap-datetimepicker-widget table .glyphicon-chevron-left,
-.bootstrap-datetimepicker-widget table .glyphicon-chevron-right,
 .bootstrap-datetimepicker-widget table th.picker-switch,
 .bootstrap-datetimepicker-widget table td.day,
 .bootstrap-datetimepicker-widget table th.dow {
-    padding: 10px;
+    padding: var(--datetimepicker-padding, 10px);
 }
 
 .bootstrap-datetimepicker-widget table .datepicker-decades span.decade {

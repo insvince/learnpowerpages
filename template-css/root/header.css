@@ -180,6 +180,13 @@ div.navbar>div.container>button.navbar-toggler>span.navbar-toggler-icon {
     color: var(--navbar-text-color);
     border-radius: var(--border-radius) 0 0 var(--border-radius);
     outline: none;
+    /* Nên thêm trạng thái active */
+}
+
+.btn-select>ul>li.dropdown-submenu>button#search-filter:active {
+    background-color: var(--navbar-background-color-hover) !important;
+    color: var(--navbar-background-color) !important;
+    border: 1px solid var(--navbar-background-color-hover) !important;
 }
 
 .btn-select>ul>li.dropdown-submenu>button#search-filter:hover {

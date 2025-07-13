@@ -126,13 +126,15 @@
     background-image: none !important;
     border: transparent !important;
     font-weight: 700;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .section__list button.dt-paging-button:not(.disabled):hover,
-.section__list button.dt-paging-button:is(.current) {
-    background-color: var(--button-background-color-hover) !important;
-    color: var(--button-text-color-hover) !important;
-    border-radius: 50% !important;
+.section__list button.dt-paging-button:is(.current),
+.section__list button.dt-paging-button:focus {
+    background-color: var(--button-background-color-hover);
+    color: var(--button-text-color-hover);
 }
 
 /*  */

@@ -254,6 +254,22 @@ section.modal>.modal-dialog>.modal-content>.modal-footer>button:disabled {
     color: var(--portalThemeColorCustom4);
 }
 
+/* section.modal>.modal-dialog>.modal-content>.modal-footer>button:focus,
+section.modal>.modal-dialog>.modal-content>.modal-footer>button:focus-visible {
+    outline: 2px solid var(--primary-color-custom);
+} */
+
+/* @media (max-width: 600px) {
+    .modal-content>.modal-body>.entity-grid .pagination>li {
+        height: 32px;
+        width: 32px;
+    }
+    section.modal>.modal-dialog>.modal-content>.modal-footer>button {
+        min-height: 32px;
+        font-size: 14px;
+    }
+} */
+
 /* section.modal>.modal-dialog>.modal-content>.modal-footer>button.primary {}
 
 section.modal>.modal-dialog>.modal-content>.modal-footer>button.cancel {}
