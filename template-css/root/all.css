@@ -6,6 +6,7 @@
 @import url(./profile.css);
 @import url(./standard-form.css);
 @import url(./custom-form.css);
+@import url(./alert.css);
 @import url(./modal.css);
 @import url(./datetimepicker.css);
 
@@ -2157,6 +2158,39 @@ td.subgrid-cell>.control>.subgrid>.entity-grid .pagination>li:not(.disabled):hov
 
 /*  */
 /* End custom form region */
+/*  */
+/*  */
+/* Alert region */
+/*  */
+div.alert:focus-visible {
+    outline: var(--alert-outline);
+}
+
+div.alert ul {
+    padding-left: 0;
+}
+
+div.alert ul li {
+    list-style-type: none !important;
+    color: var(--portalThemeColorCustom1) !important;
+}
+
+div.alert ul li:hover {
+    color: var(--portalThemeColorCustom2) !important;
+    cursor: pointer;
+}
+
+div.alert ul li a {
+    list-style-type: none !important;
+    color: var(--alert-text-color) !important;
+}
+
+div.alert ul li a:hover {
+    color: var(--alert-text-color-hover) !important;
+}
+
+/*  */
+/* End alert region */
 /*  */
 /*  */
 /* Modal region */
