@@ -208,6 +208,56 @@
     color: var(--primary-color-custom);
 }
 
+form[action="/Account/Login/ForgotPassword"] {}
+
+form[action="/Account/Login/ForgotPassword"]>.portal-form {}
+
+form[action="/Account/Login/ForgotPassword"]>.portal-form>h1.forgot-password-heading {}
+
+form[action="/Account/Login/ForgotPassword"]>.portal-form>h1.forgot-password-heading>.xrm-editable-text {}
+
+form[action="/Account/Login/ForgotPassword"]>.portal-form>h1.forgot-password-heading>.xrm-editable-text>.xrm-attribute-value-encoded {}
+
+form[action="/Account/Login/ForgotPassword"]>.portal-form>#loginValidationSummary {}
+
+form[action="/Account/Login/ForgotPassword"]>.portal-form>#loginValidationSummary>ul {}
+
+form[action="/Account/Login/ForgotPassword"]>.portal-form>#loginValidationSummary>ul>li {}
+
+form[action="/Account/Login/ForgotPassword"]>.portal-form>#loginValidationSummary>ul>li>a {}
+
+form[action="/Account/Login/ForgotPassword"]>.portal-form>.row {}
+
+form[action="/Account/Login/ForgotPassword"]>.portal-form>.row>div input {
+    border: 1px solid var(--border-disable);
+    color: var(--portalThemeColorCustom1);
+    border-radius: var(--border-radius);
+}
+
+form[action="/Account/Login/ForgotPassword"]>.portal-form>.row>div input:focus,
+form[action="/Account/Login/ForgotPassword"]>.portal-form>.row>div input:focus-visible {
+    border-color: var(--portalThemeColorCustom11) !important;
+}
+
+form[action="/Account/Login/ForgotPassword"]>.portal-form>.row>div>p.form-text {
+    margin-bottom: 0;
+}
+
+form[action="/Account/Login/ForgotPassword"]>.portal-form>.row>div>button#submit-forgot-password {
+    background-color: var(--primary-color-custom);
+    color: var(--portalThemeColorCustom4);
+    border-color: var(--primary-color-custom);
+    border-radius: var(--border-radius);
+    outline: none;
+}
+
+form[action="/Account/Login/ForgotPassword"]>.portal-form>.row>div>button#submit-forgot-password:hover,
+form[action="/Account/Login/ForgotPassword"]>.portal-form>.row>div>button#submit-forgot-password:focus,
+form[action="/Account/Login/ForgotPassword"]>.portal-form>.row>div>button#submit-forgot-password:focus-visible {
+    background-color: var(--portalThemeColorCustom4);
+    color: var(--primary-color-custom);
+}
+
 /*  */
 /* End profile region */
 /*  */
