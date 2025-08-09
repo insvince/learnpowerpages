@@ -50,7 +50,6 @@ common.functions = {
         }
     },
 
-    // console.log(await common.functions.retrieveEntityRefactor('/_api/' + CustomUser.EntityName + 's', 10, true));
     retrieveEntityRefactor: async function (url, pageSize, count = true) {
         let headers = { Prefer: 'odata.include-annotations=*' };
         if (pageSize) headers.Prefer += `,odata.maxpagesize=${pageSize}`;
@@ -66,22 +65,15 @@ common.functions = {
         };
     },
 
-    // var record = {};
-    // record.fpt_role = CustomUser.OptionSets.Role.Member; // Choice
-    // console.log(await common.functions.createRecordRefactor(record, CustomUser.EntityName + 's'));
     createRecordRefactor: async function (record, entitySetName) {
         const result = await common.functions.executeRequest(REQUEST_METHOD.POST, `/_api/${entitySetName}`, record);
         return { data: result.data, id: result.xhr.getResponseHeader('entityid') || null };
     },
 
-    // var record = {};
-    // record.fpt_role = CustomUser.OptionSets.Role.Admin; // Choice
-    // console.log(await common.functions.updateRecordRefactor(record, CustomUser.EntityName + 's', '076201f2-5770-f011-b4cd-000d3ac70d01'));
     updateRecordRefactor: function (record, entitySetName, id) {
         return common.functions.executeRequest(REQUEST_METHOD.PATCH, `/_api/${entitySetName}(${id})`, record);
     },
 
-    // console.log(await common.functions.deleteRecordRefactor(CustomUser.EntityName + 's', '076201f2-5770-f011-b4cd-000d3ac70d01'));
     deleteRecordRefactor: function (entitySetName, recordId) {
         return common.functions.executeRequest(REQUEST_METHOD.DELETE, `/_api/${entitySetName}(${recordId})`);
     },
