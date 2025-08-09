@@ -32,7 +32,7 @@
 
 ### Changed
 
--   Không có (phiên bản đầu tiên).
+-   Update lỗi hiển thị option đã chọn với hiển thị multi-column với cấu hình `columns`.
 
 ### Removed
 

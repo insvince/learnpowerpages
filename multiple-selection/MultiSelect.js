@@ -14,11 +14,11 @@ const optionsSingleColumn = {
     selectAll: true,
     listAll: true,
     closeListOnItemSelect: false,
-    name: '',
-    width: '',
-    height: '',
-    dropdownWidth: '',
-    dropdownHeight: '',
+    name: null,
+    width: null,
+    height: null,
+    dropdownWidth: null,
+    dropdownHeight: null,
     data: [
         { value: '1', text: 'Option 1', selected: false },
         { value: '2', text: 'Option 2', selected: false },
@@ -33,6 +33,8 @@ const optionsSingleColumn = {
     onChange: function () {},
     onSelect: function () {},
     onUnselect: function () {},
+    onSelectAll: function () {},
+    onUnselectAll: function () {},
 };
 
 const optionsMultiColumn = {
@@ -42,15 +44,19 @@ const optionsMultiColumn = {
     selectAll: true,
     listAll: true,
     closeListOnItemSelect: false,
-    name: '',
-    width: '',
-    height: '',
-    dropdownWidth: '',
-    dropdownHeight: '',
+    name: null,
+    width: null,
+    height: null,
+    dropdownWidth: null,
+    dropdownHeight: null,
     data: [
         { value: '1', region: 'Asia', nation: 'Vietnam', selected: false },
         { value: '2', region: 'Asia', nation: 'Thailand', selected: false },
         { value: '3', region: 'Europe', nation: 'France', selected: false },
+        { value: '4', region: 'Europe', nation: 'Germany', selected: false },
+        { value: '5', region: 'Europe', nation: 'Finland', selected: false },
+        { value: '6', region: 'Europe', nation: 'Sweetzerland', selected: false },
+        { value: '7', region: 'Europe', nation: 'England', selected: false },
     ],
     multiColumn: true,
     columns: [
@@ -60,6 +66,8 @@ const optionsMultiColumn = {
     onChange: function () {},
     onSelect: function () {},
     onUnselect: function () {},
+    onSelectAll: function () {},
+    onUnselectAll: function () {},
 };
 
 class MultiSelect {
@@ -88,6 +96,8 @@ class MultiSelect {
             onChange: function () {},
             onSelect: function () {},
             onUnselect: function () {},
+            onSelectAll: function () {},
+            onUnselectAll: function () {},
         };
         // Merge user options with defaults
         this.options = Object.assign(defaults, options);
@@ -106,9 +116,7 @@ class MultiSelect {
         }
 
         // Set the name for the component (from attribute or generate unique)
-        this.name = this.selectElement.getAttribute('name')
-            ? this.selectElement.getAttribute('name')
-            : 'multi-select-' + Math.floor(Math.random() * 1000000);
+        this.name = this.selectElement.getAttribute('name') ? this.selectElement.getAttribute('name') : 'multi-select-' + Math.floor(Math.random() * 1000000);
 
         // If no data provided, extract options from the select element
         if (!this.options.data.length) {
@@ -169,14 +177,7 @@ class MultiSelect {
                 <span class="multi-select-option-radio"></span>
                 ${
                     multiColumn && columns.length > 0
-                        ? columns
-                              .map(
-                                  (col) =>
-                                      `<span class="multi-select-option-col multi-select-option-col-${col.key}">${
-                                          data[i][col.key] || ''
-                                      }</span>`
-                              )
-                              .join('')
+                        ? columns.map((col) => `<span class="multi-select-option-col multi-select-option-col-${col.key}">${data[i][col.key] || ''}</span>`).join('')
                         : `<span class="multi-select-option-text">${data[i].html ? data[i].html : data[i].text}</span>`
                 }
             </div>
@@ -192,24 +193,18 @@ class MultiSelect {
         }
 
         let template = `
-        <div class="multi-select ${this.name}"${this.selectElement.id ? ' id="' + this.selectElement.id + '"' : ''} style="${
-            this.width ? 'width:' + this.width + ';' : ''
-        }${this.height ? 'height:' + this.height + ';' : ''}">
-            ${this.selectedValues.map((value) => `<input type="hidden" name="${this.name}[]" value="${value}">`).join('')}
-            <div class="multi-select-header" style="${this.width ? 'width:' + this.width + ';' : ''}${
+        <div class="multi-select ${this.name}"${this.selectElement.id ? ' id="' + this.selectElement.id + '"' : ''} style="${this.width ? 'width:' + this.width + ';' : ''}${
             this.height ? 'height:' + this.height + ';' : ''
         }">
+            ${this.selectedValues.map((value) => `<input type="hidden" name="${this.name}[]" value="${value}">`).join('')}
+            <div class="multi-select-header" style="${this.width ? 'width:' + this.width + ';' : ''}${this.height ? 'height:' + this.height + ';' : ''}">
                 <span class="multi-select-header-placeholder">${this.placeholder}</span>
                 <span class="multi-select-header-max">${this.options.max ? this.selectedValues.length + '/' + this.options.max : ''}</span>
             </div>
             <div class="multi-select-options" style="${this.options.dropdownWidth ? 'width:' + this.options.dropdownWidth + ';' : ''}${
             this.options.dropdownHeight ? 'height:' + this.options.dropdownHeight + ';' : ''
         }">
-                ${
-                    this.options.search === true || this.options.search === 'true'
-                        ? '<input type="text" class="multi-select-search" placeholder="Search...">'
-                        : ''
-                }
+                ${this.options.search === true || this.options.search === 'true' ? '<input type="text" class="multi-select-search" placeholder="Search...">' : ''}
                 ${optionsHeader}
                 ${selectAllHTML}
                 ${optionsHTML}
@@ -236,9 +231,7 @@ class MultiSelect {
                 if (!option.classList.contains('multi-select-selected')) {
                     // Select option
                     if (this.options.max && this.selectedValues.length >= this.options.max) return;
-                    this.element
-                        .querySelector('.multi-select')
-                        .insertAdjacentHTML('afterbegin', `<input type="hidden" name="${this.name}[]" value="${option.dataset.value}">`);
+                    this.element.querySelector('.multi-select').insertAdjacentHTML('afterbegin', `<input type="hidden" name="${this.name}[]" value="${option.dataset.value}">`);
                     this.data.find((data) => data.value == option.dataset.value).selected = true;
                     option.classList.add('multi-select-selected');
 
@@ -258,16 +251,11 @@ class MultiSelect {
                                             : option.querySelector(`.multi-select-option-col-${col.key}`)?.innerText || ''
                                     )
                                     .join(' | ');
-                                headerElement.insertAdjacentHTML(
-                                    'afterbegin',
-                                    `<span class="multi-select-header-option" data-value="${option.dataset.value}">${display}</span>`
-                                );
+                                headerElement.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-option" data-value="${option.dataset.value}">${display}</span>`);
                             } else {
                                 headerElement.insertAdjacentHTML(
                                     'afterbegin',
-                                    `<span class="multi-select-header-option" data-value="${option.dataset.value}">${
-                                        option.querySelector('.multi-select-option-text').innerHTML
-                                    }</span>`
+                                    `<span class="multi-select-header-option" data-value="${option.dataset.value}">${option.querySelector('.multi-select-option-text').innerHTML}</span>`
                                 );
                             }
                             this._updateHeaderSummaryByWidth(headerElement);
@@ -310,18 +298,26 @@ class MultiSelect {
                             headerElement.querySelector('.multi-select-header-more').remove();
                         }
                         // Show all selected options again
-                        const arrays = Array.from(this.element.querySelectorAll('.multi-select-option')).filter((option) =>
-                            option.classList.contains('multi-select-selected')
-                        );
+                        const arrays = Array.from(this.element.querySelectorAll('.multi-select-option')).filter((option) => option.classList.contains('multi-select-selected'));
                         arrays.forEach((itemOption) => {
                             const currentOption = headerElement.querySelector(`[data-value="${itemOption.dataset.value}"]`);
                             if (currentOption) return;
-                            headerElement.insertAdjacentHTML(
-                                'afterbegin',
-                                `<span class="multi-select-header-option" data-value="${itemOption.dataset.value}">${
-                                    itemOption.querySelector('.multi-select-option-text').innerHTML
-                                }</span>`
-                            );
+                            if (multiColumn && columns.length > 0) {
+                                const display = columns
+                                    .map((col) =>
+                                        typeof col === 'string'
+                                            ? itemOption.querySelector(`.multi-select-option-col-${col}`)?.innerText || ''
+                                            : itemOption.querySelector(`.multi-select-option-col-${col.key}`)?.innerText || ''
+                                    )
+                                    .join(' | ');
+                                headerElement.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-option" data-value="${itemOption.dataset.value}">${display}</span>`);
+                            } else {
+                                // Insert single column option
+                                headerElement.insertAdjacentHTML(
+                                    'afterbegin',
+                                    `<span class="multi-select-header-option" data-value="${itemOption.dataset.value}">${itemOption.querySelector('.multi-select-option-text').innerHTML}</span>`
+                                );
+                            }
                         });
                         this._updateHeaderSummaryByWidth(headerElement);
                     }
@@ -331,10 +327,7 @@ class MultiSelect {
                     if (this.element.querySelector('.multi-select-header-option')) {
                         this.element.querySelector('.multi-select-header-option').remove();
                     }
-                    headerElement.insertAdjacentHTML(
-                        'afterbegin',
-                        `<span class="multi-select-header-option">${this.selectedValues.length} selected</span>`
-                    );
+                    headerElement.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-option">${this.selectedValues.length} selected</span>`);
                 }
                 // Update placeholder and summary
                 if (!this.element.querySelector('.multi-select-header-option')) {
@@ -342,15 +335,9 @@ class MultiSelect {
                         this.element.querySelector('.multi-select-header-more').remove();
                     }
                     if (this.selectedValues.length > 0) {
-                        headerElement.insertAdjacentHTML(
-                            'afterbegin',
-                            `<span class="multi-select-header-more">${this.selectedValues.length} selected</span>`
-                        );
+                        headerElement.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-more">${this.selectedValues.length} selected</span>`);
                     } else {
-                        headerElement.insertAdjacentHTML(
-                            'afterbegin',
-                            `<span class="multi-select-header-placeholder">${this.placeholder}</span>`
-                        );
+                        headerElement.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-placeholder">${this.placeholder}</span>`);
                     }
                 } else if (this.element.querySelector('.multi-select-header-placeholder')) {
                     this.element.querySelector('.multi-select-header-placeholder').remove();
@@ -401,9 +388,7 @@ class MultiSelect {
                     if (multiColumn && columns.length > 0) {
                         text = columns
                             .map((col) =>
-                                typeof col === 'string'
-                                    ? option.querySelector(`.multi-select-option-col-${col}`)?.innerText || ''
-                                    : option.querySelector(`.multi-select-option-col-${col.key}`)?.innerText || ''
+                                typeof col === 'string' ? option.querySelector(`.multi-select-option-col-${col}`)?.innerText || '' : option.querySelector(`.multi-select-option-col-${col.key}`)?.innerText || ''
                             )
                             .join(' ');
                     } else {
@@ -426,6 +411,13 @@ class MultiSelect {
                         option.click();
                     }
                 });
+
+                // Update select all button state
+                if (allSelected) {
+                    this.options.onUnselectAll(this.selectedValues, this.selectedItems);
+                } else {
+                    this.options.onSelectAll(this.selectedValues, this.selectedItems);
+                }
 
                 if (this.options.max && this.selectedValues.length === this.options.max) {
                     if (this.options.selectAll === true || this.options.selectAll === 'true') {
@@ -456,10 +448,7 @@ class MultiSelect {
         document.addEventListener('click', (event) => {
             // Use a fallback class if this.name is empty
             const selector = this.name ? '.' + this.name : '.multi-select';
-            if (
-                !event.target.closest(selector) &&
-                !(this.selectElement.id && event.target.closest('label[for="' + this.selectElement.id + '"]'))
-            ) {
+            if (!event.target.closest(selector) && !(this.selectElement.id && event.target.closest('label[for="' + this.selectElement.id + '"]'))) {
                 headerElement.classList.remove('multi-select-header-active');
             }
         });
@@ -478,12 +467,7 @@ class MultiSelect {
         }
         // Calculate the visible width of the header (excluding padding and border)
         const style = window.getComputedStyle(headerElement);
-        const headerWidth =
-            headerElement.offsetWidth -
-            parseFloat(style.paddingLeft) -
-            parseFloat(style.paddingRight) -
-            parseFloat(style.borderLeftWidth) -
-            parseFloat(style.borderRightWidth);
+        const headerWidth = headerElement.offsetWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) - parseFloat(style.borderLeftWidth) - parseFloat(style.borderRightWidth);
 
         // Calculate the total width of all selected option tags
         const headerOptions = headerElement.querySelectorAll('.multi-select-header-option');
@@ -494,10 +478,7 @@ class MultiSelect {
         // If total width exceeds header width (with a small margin), show summary instead
         if (totalWidth > headerWidth - 20) {
             headerOptions.forEach((opt) => opt.remove());
-            headerElement.insertAdjacentHTML(
-                'afterbegin',
-                `<span class="multi-select-header-more">${this.selectedValues.length} selected</span>`
-            );
+            headerElement.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-more">${this.selectedValues.length} selected</span>`);
         }
     }
 
@@ -513,20 +494,13 @@ class MultiSelect {
                     if (this.options.multiColumn && this.options.columns.length > 0) {
                         display = this.options.columns
                             .map((col) =>
-                                typeof col === 'string'
-                                    ? option.querySelector(`.multi-select-option-col-${col}`)?.innerText || ''
-                                    : option.querySelector(`.multi-select-option-col-${col.key}`)?.innerText || ''
+                                typeof col === 'string' ? option.querySelector(`.multi-select-option-col-${col}`)?.innerText || '' : option.querySelector(`.multi-select-option-col-${col.key}`)?.innerText || ''
                             )
                             .join(' | ');
                     } else {
-                        display = option.querySelector('.multi-select-option-text')
-                            ? option.querySelector('.multi-select-option-text').innerHTML
-                            : '';
+                        display = option.querySelector('.multi-select-option-text') ? option.querySelector('.multi-select-option-text').innerHTML : '';
                     }
-                    header.insertAdjacentHTML(
-                        'afterbegin',
-                        `<span class="multi-select-header-option" data-value="${option.dataset.value}">${display}</span>`
-                    );
+                    header.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-option" data-value="${option.dataset.value}">${display}</span>`);
                 }
             });
             this._updateHeaderSummaryByWidth(header);

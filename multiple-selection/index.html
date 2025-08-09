@@ -93,7 +93,8 @@
             data: [
                 {
                     value: 'opt1',
-                    text: 'Option 1'
+                    text: 'Option 1',
+                    selected: true
                 },
                 {
                     value: 'opt2',
@@ -102,7 +103,6 @@
                 {
                     value: 'opt3',
                     text: 'Option 3',
-                    selected: true
                 },
                 {
                     value: 'opt4',
@@ -119,13 +119,25 @@
             listAll: false,
             max: 2,
             onChange: function (value, text, element) {
-                console.log('Change:', value, text, element);
+                // console.log('Change:', value, text, element);
             },
             onSelect: function (value, text, element) {
-                console.log('Selected:', value, text, element);
+                // console.log('Selected:', value, text, element);
             },
             onUnselect: function (value, text, element) {
-                console.log('Unselected:', value, text, element);
+                // console.log('Unselected:', value, text, element);
+            },
+            onSelectAll: function (selectedValues, selectedItems) {
+                console.log('selectedValues:', selectedValues);
+                console.log('selectedItems:', selectedItems);
+                if (selectedValues.length > 2) {
+                    alert('You can only select up to 2 options.');
+                    return false; // Prevent selection if more than 2
+                }
+            },
+            onUnselectAll: function (selectedValues, selectedItems) {
+                console.log('selectedValues:', selectedValues);
+                console.log('selectedItems:', selectedItems);
             }
         });
     </script>
