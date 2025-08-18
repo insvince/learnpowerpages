@@ -442,6 +442,27 @@
             errorBox.className = `alert alert-${type}`;
             errorBox.textContent = msg;
         }
+
+        async function massUpdateRecords(entityName, updates) {
+            for (const update of updates) {
+                try {
+                    await fetch(`/api/data/v9.2/${entityName}(${update.id})`, {
+                        method: "PATCH",
+                        headers: {
+                            "OData-MaxVersion": "4.0",
+                            "OData-Version": "4.0",
+                            "Accept": "application/json",
+                            "Content-Type": "application/json",
+                            "Prefer": "return=representation"
+                        },
+                        body: JSON.stringify(update.data)
+                    });
+                    console.log(`Updated record ${update.id}`);
+                } catch (err) {
+                    console.error(`Error updating ${update.id}:`, err);
+                }
+            }
+        }
     </script>
 </body>
 
