@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <title>Batch overwrite trong Bootstrap Modal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Modal body chia 2 phần: top 40% / bottom 60% */
+        .modal-body.split-40-60 {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-body.split-40-60 .top-panel {
+            flex: 0 0 40%;
+            overflow: auto;
+        }
+
+        .modal-body.split-40-60 .grid {
+            display: grid;
+            gap: .75rem;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        @media (max-width: 992px) {
+            .modal-body.split-40-60 .grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .modal-body.split-40-60 .bottom-panel {
+            flex: 1 1 60%;
+            overflow: auto;
+        }
+
+        .cell-error {
+            background: #dc3545 !important;
+            color: #fff !important;
+        }
+    </style>
+</head>
+
+<body class="p-3">
+
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#batchModal">Mở modal</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="batchModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Batch overwrite line items</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body split-40-60">
+                    <!-- TOP: Form 40% -->
+                    <div class="top-panel border-bottom">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <div class="d-flex gap-3 align-items-center">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="mode" id="modeSingle"
+                                        value="single" checked>
+                                    <label class="form-check-label" for="modeSingle">Single (dòng đang chọn)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="mode" id="modeMultiple"
+                                        value="multiple">
+                                    <label class="form-check-label" for="modeMultiple">Multiple (chạy liên tục)</label>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button id="runBtn" class="btn btn-success">Run / Resume</button>
+                                <button id="clearBtn" class="btn btn-outline-secondary">Clear inputs</button>
+                            </div>
+                        </div>
+
+                        <div id="errorBox" class="alert alert-danger d-none mb-2"></div>
+
+                        <!-- 8 inputs tương ứng 8 cột. Để trống = không overwrite -->
+                        <form id="batchForm" class="grid">
+                            <!-- Tên (text) -->
+                            <div>
+                                <label class="form-label">Name</label>
+                                <input class="form-control" type="text" id="nameInput"
+                                    placeholder="(giữ nguyên nếu để trống)">
+                            </div>
+                            <!-- Code (text) -->
+                            <div>
+                                <label class="form-label">Code</label>
+                                <input class="form-control" type="text" id="codeInput"
+                                    placeholder="(giữ nguyên nếu để trống)">
+                            </div>
+                            <!-- Ship Date (date) -->
+                            <div>
+                                <label class="form-label">Ship date</label>
+                                <input class="form-control" type="date" id="shipDateInput">
+                            </div>
+                            <!-- Status (optionset) -->
+                            <div>
+                                <label class="form-label">Status</label>
+                                <select class="form-select" id="statusInput">
+                                    <option value="">(giữ nguyên)</option>
+                                    <option>New</option>
+                                    <option>Pending</option>
+                                    <option>Done</option>
+                                </select>
+                            </div>
+                            <!-- Qty (number) -->
+                            <div>
+                                <label class="form-label">Qty</label>
+                                <input class="form-control" type="number" id="qtyInput" step="1" min="0"
+                                    placeholder="(giữ nguyên)">
+                            </div>
+                            <!-- Price (number) -->
+                            <div>
+                                <label class="form-label">Price</label>
+                                <input class="form-control" type="number" id="priceInput" step="0.01" min="0"
+                                    placeholder="(giữ nguyên)">
+                            </div>
+                            <!-- Note (text) -->
+                            <div>
+                                <label class="form-label">Note</label>
+                                <input class="form-control" type="text" id="noteInput" placeholder="(giữ nguyên)">
+                            </div>
+                            <!-- Due (date) -->
+                            <div>
+                                <label class="form-label">Due date</label>
+                                <input class="form-control" type="date" id="dueInput">
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- BOTTOM: Table 60% -->
+                    <div class="bottom-panel pt-3">
+                        <div class="small text-muted mb-2">Bấm chọn một dòng để chạy chế độ Single hoặc làm mốc bắt đầu
+                            cho Multiple.</div>
+                        <div class="table-responsive">
+                            <table id="itemsTable" class="table table-sm table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Code</th>
+                                        <th>Ship date</th>
+                                        <th>Status</th>
+                                        <th class="text-end">Qty</th>
+                                        <th class="text-end">Price</th>
+                                        <th>Note</th>
+                                        <th>Due</th>
+                                    </tr>
+                                </thead>
+                                <tbody><!-- render bằng JS --></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (Popper included) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let singleIndex = null;
+        // ==== CẤU HÌNH CỘT & VALIDATION (mỗi cột 1 hàm riêng) ====
+        const cols = [
+            { key: 'name', label: 'Name', type: 'text' },
+            { key: 'code', label: 'Code', type: 'text' },
+            { key: 'shipDate', label: 'Ship date', type: 'date' },
+            { key: 'status', label: 'Status', type: 'optionset', options: ['New', 'Pending', 'Done'] },
+            { key: 'qty', label: 'Qty', type: 'number' },
+            { key: 'price', label: 'Price', type: 'number' },
+            { key: 'note', label: 'Note', type: 'text' },
+            { key: 'due', label: 'Due', type: 'date' },
+        ];
+
+        const validators = {
+            name: v => v.length >= 2 || 'Name tối thiểu 2 ký tự',
+            code: v => /^[A-Za-z0-9-]{3,}$/.test(v) || 'Code >=3 ký tự, chữ/số/-',
+            shipDate: v => !isNaN(Date.parse(v)) || 'Ship date không hợp lệ',
+            status: v => ['New', 'Pending', 'Done'].includes(v) || 'Status không hợp lệ',
+            qty: v => Number.isFinite(+v) && +v >= 0 || 'Qty phải là số >= 0',
+            price: v => Number.isFinite(+v) && +v >= 0 || 'Price phải là số >= 0',
+            note: v => v.length <= 120 || 'Note tối đa 120 ký tự',
+            due: v => !isNaN(Date.parse(v)) || 'Due date không hợp lệ',
+        };
+
+        // ==== DATA MẪU ====
+        const rows = Array.from({ length: 12 }).map((_, i) => ({
+            id: i + 1,
+            name: `Item ${i + 1}`,
+            code: `P-${1000 + i}`,
+            shipDate: isoTodayPlus(i % 5),
+            status: ['New', 'Pending', 'Done'][i % 3],
+            qty: (i + 1) * 2,
+            price: (i + 1) * 10,
+            note: i % 2 ? '—' : '',
+            due: isoTodayPlus((i % 5) + 3),
+        }));
+
+        function isoTodayPlus(n = 0) {
+            const d = new Date(); d.setDate(d.getDate() + n);
+            return d.toISOString().slice(0, 10);
+        }
+
+        // ==== RENDER BẢNG & CHỌN DÒNG ====
+        const tbody = document.querySelector('#itemsTable tbody');
+        let selectedIndex = null;
+
+        function renderTable() {
+            tbody.innerHTML = '';
+            rows.forEach((r, idx) => {
+                const tr = document.createElement('tr');
+                tr.dataset.index = idx;
+                tr.innerHTML = `
+          <td class="text-muted">${r.id}</td>
+          <td data-col="name">${escapeHtml(r.name)}</td>
+          <td data-col="code">${escapeHtml(r.code)}</td>
+          <td data-col="shipDate">${r.shipDate}</td>
+          <td data-col="status">${r.status}</td>
+          <td data-col="qty" class="text-end">${r.qty}</td>
+          <td data-col="price" class="text-end">${r.price.toFixed(2)}</td>
+          <td data-col="note">${escapeHtml(r.note)}</td>
+          <td data-col="due">${r.due}</td>`;
+                tr.addEventListener('click', () => {
+                    const isSelected = tr.classList.contains('table-active');
+                    // Xóa class active tất cả các dòng khác
+                    [...tbody.rows].forEach(r => r.classList.remove('table-active'));
+                    // Nếu dòng vừa click chưa được chọn thì mới thêm class
+                    if (!isSelected) {
+                        tr.classList.add('table-active');
+                        selectedIndex = idx;
+                    } else {
+                        selectedIndex = null; // Bỏ chọn
+                    }
+                });
+                tbody.appendChild(tr);
+            });
+        }
+        renderTable();
+
+        function escapeHtml(s) {
+            return s?.toString()
+                .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;') ?? '';
+        }
+
+        // ==== ĐỌC INPUTS: ô trống => bỏ qua ====
+        function readInputs() {
+            const get = id => document.getElementById(id).value?.trim();
+            const data = {
+                name: get('nameInput'),
+                code: get('codeInput'),
+                shipDate: get('shipDateInput'),
+                status: get('statusInput'),
+                qty: get('qtyInput'),
+                price: get('priceInput'),
+                note: get('noteInput'),
+                due: get('dueInput'),
+            };
+            // loại bỏ key có giá trị rỗng
+            Object.keys(data).forEach(k => (data[k] === '' || data[k] == null) && delete data[k]);
+            return data;
+        }
+
+        // ==== STATE MÁY CHẠY BATCH ====
+        const errorBox = document.getElementById('errorBox');
+        let running = false;
+        let resumeIndex = null; // nơi dừng lần trước (Multiple)
+
+        document.getElementById('runBtn').addEventListener('click', startOrResume);
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            document.getElementById('batchForm').reset();
+            showError(); // ẩn lỗi
+        });
+
+        function startOrResume() {
+            if (running) return;
+            const updates = readInputs();
+            if (Object.keys(updates).length === 0) { showError('Hãy nhập ít nhất 1 cột để overwrite.'); return; }
+
+            clearCellErrors();
+
+            const mode = document.querySelector('input[name="mode"]:checked').value;
+            let startAt = (resumeIndex ?? selectedIndex ?? 0);
+
+            if (mode === 'single') {
+                if (selectedIndex == null) { showError('Chế độ Single: hãy chọn 1 dòng trước.'); return; }
+                runSingle(selectedIndex, updates);
+            } else {
+                runMultiple(startAt, updates);
+            }
+        }
+
+        // ==== CHẠY SINGLE ====
+        function runSingle(selectedIndex, updates) {
+            if (singleIndex === null) {
+                if (selectedIndex == null) {
+                    showError('Chế độ Single: hãy chọn 1 dòng trước.');
+                    return;
+                }
+                singleIndex = selectedIndex;
+            }
+
+            // Bỏ highlight cũ
+            [...tbody.rows].forEach(tr => tr.classList.remove('table-active'));
+
+            const idx = singleIndex;
+            // Highlight dòng hiện tại
+            const trCurrent = tbody.querySelector(`tr[data-index="${idx}"]`);
+            trCurrent?.classList.add('table-active');
+
+            const ok = validateRowWith(updates, idx);
+            if (!ok) {
+                showError(`Lỗi tại dòng #${rows[idx].id}. Sửa và bấm lại để thử tiếp.`);
+                return;
+            }
+
+            applyUpdates(idx, updates);
+            renderRow(idx);
+            showError(`Đã overwrite dòng #${rows[idx].id}`, 'success');
+
+            singleIndex++;
+            if (singleIndex >= rows.length) {
+                showError('Đã chạy hết bảng ở chế độ Single.', 'info');
+                singleIndex = 0;
+                return;
+            }
+
+            // Highlight dòng tiếp theo
+            [...tbody.rows].forEach(tr => tr.classList.remove('table-active'));
+            const trNext = tbody.querySelector(`tr[data-index="${singleIndex}"]`);
+            trNext?.classList.add('table-active');
+        }
+
+
+        // Khi click chọn dòng mới => reset singleIndex
+        tbody.addEventListener('click', e => {
+            const tr = e.target.closest('tr');
+            if (!tr) return;
+            selectedIndex = Number(tr.dataset.index);
+            singleIndex = null; // reset
+        });
+
+
+        // ==== CHẠY MULTIPLE (có dừng khi lỗi) ====
+        function runMultiple(startIdx, updates) {
+            running = true;
+            showError('Đang chạy batch Multiple…', 'info');
+            const step = (i) => {
+                if (i >= rows.length) {
+                    running = false; resumeIndex = null;
+                    showError('Hoàn tất batch Multiple ✅', 'success'); return;
+                }
+                // nếu user đổi selection giữa chừng cũng không ảnh hưởng
+                const ok = validateRowWith(updates, i);
+                if (!ok) {
+                    running = false;
+                    resumeIndex = i; // lần sau chạy tiếp từ đây
+                    return;
+                }
+                applyUpdates(i, updates);
+                renderRow(i);
+                // tiếp tục
+                setTimeout(() => step(i + 1), 0);
+            };
+
+            tr.addEventListener('click', () => {
+                [...tbody.rows].forEach(tr => tr.classList.remove('table-active'));
+                tr.classList.add('table-active');
+                selectedIndex = idx;
+                singleIndex = null; // reset
+                clearCurrentLineHighlight();
+            });
+
+            step(startIdx);
+        }
+
+        // ==== VALIDATE TỪNG CỘT CỦA 1 DÒNG VỚI GIÁ TRỊ UPDATE ====
+        function validateRowWith(updates, rowIndex) {
+            for (const [key, val] of Object.entries(updates)) {
+                const rule = validators[key];
+                const verdict = rule(fixType(key, val));
+                if (verdict !== true) {
+                    markCellError(rowIndex, key);
+                    showError(`Lỗi tại dòng #${rows[rowIndex].id}, cột "${key}": ${verdict}`);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // ==== APPLY UPDATE ====
+        function applyUpdates(rowIndex, updates) {
+            const r = rows[rowIndex];
+            Object.entries(updates).forEach(([k, v]) => {
+                r[k] = fixType(k, v);
+            });
+        }
+
+        function fixType(key, v) {
+            if (['qty', 'price'].includes(key)) return +v;
+            return v;
+        }
+
+        // ==== UI helpers ====
+        function renderRow(idx) {
+            const tr = tbody.querySelector(`tr[data-index="${idx}"]`);
+            const r = rows[idx];
+            tr.querySelector('[data-col="name"]').textContent = r.name;
+            tr.querySelector('[data-col="code"]').textContent = r.code;
+            tr.querySelector('[data-col="shipDate"]').textContent = r.shipDate;
+            tr.querySelector('[data-col="status"]').textContent = r.status;
+            tr.querySelector('[data-col="qty"]').textContent = r.qty;
+            tr.querySelector('[data-col="price"]').textContent = r.price.toFixed(2);
+            tr.querySelector('[data-col="note"]').textContent = r.note;
+            tr.querySelector('[data-col="due"]').textContent = r.due;
+        }
+
+        function markCellError(rowIndex, key) {
+            clearCellErrors();
+            const tr = tbody.querySelector(`tr[data-index="${rowIndex}"]`);
+            const td = tr?.querySelector(`[data-col="${key}"]`);
+            td?.classList.add('cell-error');
+            tr?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        function clearCellErrors() {
+            tbody.querySelectorAll('.cell-error').forEach(td => td.classList.remove('cell-error'));
+        }
+
+        function showError(msg = '', type = 'danger') {
+            if (!msg) { errorBox.classList.add('d-none'); errorBox.textContent = ''; return; }
+            errorBox.className = `alert alert-${type}`;
+            errorBox.textContent = msg;
+        }
+    </script>
+</body>
+
+</html>

@@ -120,9 +120,12 @@
             max: 2,
             onChange: function (value, text, element) {
                 // console.log('Change:', value, text, element);
+                const multiSelectFruit = multipleSelectionElements['fruits'].multipleSelection;
+                multiSelectFruit._updateOptions(optionsSingleColumn);
             },
             onSelect: function (value, text, element) {
                 // console.log('Selected:', value, text, element);
+
             },
             onUnselect: function (value, text, element) {
                 // console.log('Unselected:', value, text, element);
