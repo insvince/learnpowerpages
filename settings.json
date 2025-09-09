@@ -1,0 +1,78 @@
+{
+    "window.commandCenter": false,
+    "explorer.confirmDelete": false,
+    "editor.tabSize": 4, // Số lượng khoảng trắng cho 1 tab
+    "editor.insertSpaces": true, // Sử dụng khoảng trắng thay vì tab
+    "editor.wordWrap": "off", // Hiển thị minimap
+    "editor.renderWhitespace": "all", // Hiển thị các khoảng trắng (space, tab)
+    "editor.cursorStyle": "line", // Format file khi gõ
+    "editor.autoClosingBrackets": "always", // Tự động đóng dấu ngoặc
+    "editor.autoIndent": "full", // Tự động căn chỉnh dòng
+    "editor.lineNumbers": "relative", // Hiển thị số dòng dạng tương đối
+    "editor.fontSize": 15,
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    }, // Kích thước font chữ
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact", // Hỗ trợ Emmet cho React
+        "vue-html": "html" // Hỗ trợ Emmet cho Vue
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features" // Sử dụng Prettier format HTML
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "prettier.tabWidth": 4,
+        "prettier.printWidth": 180,
+    },
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "prettier.printWidth": 180, // Chiều rộng tối đa của dòng trước khi xuống dòng
+    "prettier.singleQuote": true, // Dùng dấu nháy đơn thay vì nháy kép
+    "prettier.trailingComma": "es5", // Thêm dấu phẩy cuối cho ES5 (array, object)
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true, // Thêm khoảng trắng giữa dấu ngoặc {}
+    "prettier.tabWidth": 4,
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": true
+    },
+    "editor.suggest.snippetsPreventQuickSuggestions": false, // Hiển thị snippets song song với gợi ý khác
+    "editor.parameterHints.enabled": true, // Bật gợi ý tham số
+    "editor.hover.enabled": true, // Hiển thị gợi ý khi di chuột
+    "workbench.colorCustomizations": {
+        "editor.selectionBackground": "#8c3a3a70", // Màu nền khi highlight (vàng)
+    },
+    "editor.wordWrapColumn": 160, // Số lượng ký tự tối đa trước khi ngắt dòng
+    "editor.rulers": [
+        // 160,
+    ],
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "javascript.preferences.importModuleSpecifier": "non-relative",
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "workbench.startupEditor": "none",
+    "vsicons.dontShowNewVersionMessage": true,
+    "editor.stickyScroll.enabled": true,
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "workbench.colorTheme": "Dracula Theme",
+    "workbench.iconTheme": "portals_icon",
+    "[handlebars]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "git.autofetch": true,
+    "editor.minimap.renderCharacters": false, // Đặt đường kẻ ở vị trí 80 và 120 ký tự
+}
