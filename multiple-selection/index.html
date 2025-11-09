@@ -11,7 +11,6 @@
         * {
             box-sizing: border-box;
             font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            /* font-size: 16px; */
         }
 
         body {
@@ -49,9 +48,7 @@
 
 <body>
     <form>
-
         <h1>Multi Select Dropdown</h1>
-
         <label for="fruits">Fruits</label>
         <select id="fruits" name="fruits" data-placeholder="Select fruits" multiple data-multi-select>
             <option value="Apple">Apple</option>
@@ -74,15 +71,15 @@
 
         <label for="cars">Car Manufacturers</label>
         <select id="cars" name="cars" data-placeholder="Select car manufacturers" data-max="2" data-search="false"
-            data-select-all="false" data-width="300px" data-height="50px" multiple data-multi-select>
+            data-select-all="false" data-width="300px" multiple data-multi-select>
             <option value="Audi">Audi</option>
             <option value="BMW">BMW</option>
             <option value="Chevrolet">Chevrolet</option>
         </select>
 
         <label for="dynamic">Dynamic Select</label>
-        <select id="dynamic" name="dynamic"></select>
-
+        <select id="dynamic" name="dynamic" data-placeholder="Select an option" data-max="2" data-search="true"
+            data-select-all="true" data-width="300px" multiple data-multi-select></select>
     </form>
     <!-- Include the Multi Select JS class -->
     <script src="MultiSelect.js"></script>
@@ -113,30 +110,12 @@
                     text: 'Option 5'
                 }
             ],
-            placeholder: 'Select an option',
-            search: true,
-            selectAll: true,
-            listAll: false,
-            max: 2,
-            onChange: function (value, text, element) {
-                // console.log('Change:', value, text, element);
-                const multiSelectFruit = multipleSelectionElements['fruits'].multipleSelection;
-                multiSelectFruit._updateOptions(optionsSingleColumn);
-            },
-            onSelect: function (value, text, element) {
-                // console.log('Selected:', value, text, element);
-
-            },
-            onUnselect: function (value, text, element) {
-                // console.log('Unselected:', value, text, element);
-            },
+            onChange: function (value, text, element) { },
+            onSelect: function (value, text, element) { },
+            onUnselect: function (value, text, element) { },
             onSelectAll: function (selectedValues, selectedItems) {
                 console.log('selectedValues:', selectedValues);
                 console.log('selectedItems:', selectedItems);
-                if (selectedValues.length > 2) {
-                    alert('You can only select up to 2 options.');
-                    return false; // Prevent selection if more than 2
-                }
             },
             onUnselectAll: function (selectedValues, selectedItems) {
                 console.log('selectedValues:', selectedValues);
