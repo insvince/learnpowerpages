@@ -85,11 +85,11 @@ class MultiSelect {
             selectAll: true,
             listAll: true,
             closeListOnItemSelect: false,
-            name: '',
-            width: '',
-            height: '',
-            dropdownWidth: '',
-            dropdownHeight: '',
+            name: null,
+            width: null,
+            height: null,
+            dropdownWidth: null,
+            dropdownHeight: null,
             data: [], // Array of objects with { value, text, selected, html }
             multiColumn: false, // Add this flag to enable multi-column mode
             columns: [], // Array of keys for columns, e.g. { key, label }
@@ -131,6 +131,36 @@ class MultiSelect {
             }
         }
 
+        // List of allowed properties from data-* attributes
+        const allowedProps = {
+            placeholder: 'placeholder',
+            max: 'max',
+            search: 'search',
+            'select-all': 'selectAll',
+            'list-all': 'listAll',
+            'close-select': 'closeListOnItemSelect',
+            width: 'width',
+            height: 'height',
+            'dropdown-width': 'dropdownWidth',
+            'dropdown-height': 'dropdownHeight',
+            multicolumn: 'multiColumn',
+        };
+
+        // Allow data-* attributes on the select element to override options
+        for (const prop in this.selectElement.dataset) {
+            if (allowedProps[prop]) {
+                const mappedProp = allowedProps[prop];
+                const value = this.selectElement.dataset[prop];
+                if (value === 'true' || value === 'false') {
+                    this.options[mappedProp] = value === 'true';
+                } else if (!isNaN(value)) {
+                    this.options[mappedProp] = parseFloat(value);
+                } else {
+                    this.options[mappedProp] = value;
+                }
+            }
+        }
+
         // Build and replace the original select element with the custom component
         this.element = this._template();
         this.selectElement.replaceWith(this.element);
@@ -140,6 +170,17 @@ class MultiSelect {
 
         // Attach event handlers for interaction
         this._eventHandlers();
+
+        // Kiểm tra và đặt giá trị mặc định cho thuộc tính data
+        if (!Array.isArray(this.options.data)) {
+            console.error('Invalid data provided during initialization. Expected an array.');
+            this.options.data = []; // Đặt giá trị mặc định nếu không hợp lệ
+        }
+
+        if (this.options.multiColumn && (!Array.isArray(this.options.columns) || this.options.columns.length === 0)) {
+            console.error('Invalid columns provided for multi-column mode.');
+            this.options.multiColumn = false; // Tắt chế độ multi-column nếu không hợp lệ
+        }
     }
 
     /**
@@ -221,6 +262,13 @@ class MultiSelect {
      * Attach all event handlers for the component
      */
     _eventHandlers() {
+        // Remove existing event listeners
+        this.element.querySelectorAll('.multi-select-option').forEach((option) => {
+            const newOption = option.cloneNode(true);
+            option.parentNode.replaceChild(newOption, option);
+        });
+
+        // Add new event listeners
         const headerElement = this.element.querySelector('.multi-select-header');
         const { multiColumn, columns = [] } = this.options;
         // Handle option click (select/unselect)
@@ -255,7 +303,9 @@ class MultiSelect {
                             } else {
                                 headerElement.insertAdjacentHTML(
                                     'afterbegin',
-                                    `<span class="multi-select-header-option" data-value="${option.dataset.value}">${option.querySelector('.multi-select-option-text').innerHTML}</span>`
+                                    `<span class="multi-select-header-option" data-value="${option.dataset.value}">${
+                                        option.querySelector('.multi-select-option-text').innerHTML
+                                    }</span>`
                                 );
                             }
                             this._updateHeaderSummaryByWidth(headerElement);
@@ -310,12 +360,17 @@ class MultiSelect {
                                             : itemOption.querySelector(`.multi-select-option-col-${col.key}`)?.innerText || ''
                                     )
                                     .join(' | ');
-                                headerElement.insertAdjacentHTML('afterbegin', `<span class="multi-select-header-option" data-value="${itemOption.dataset.value}">${display}</span>`);
+                                headerElement.insertAdjacentHTML(
+                                    'afterbegin',
+                                    `<span class="multi-select-header-option" data-value="${itemOption.dataset.value}">${display}</span>`
+                                );
                             } else {
                                 // Insert single column option
                                 headerElement.insertAdjacentHTML(
                                     'afterbegin',
-                                    `<span class="multi-select-header-option" data-value="${itemOption.dataset.value}">${itemOption.querySelector('.multi-select-option-text').innerHTML}</span>`
+                                    `<span class="multi-select-header-option" data-value="${itemOption.dataset.value}">${
+                                        itemOption.querySelector('.multi-select-option-text').innerHTML
+                                    }</span>`
                                 );
                             }
                         });
@@ -388,13 +443,15 @@ class MultiSelect {
                     if (multiColumn && columns.length > 0) {
                         text = columns
                             .map((col) =>
-                                typeof col === 'string' ? option.querySelector(`.multi-select-option-col-${col}`)?.innerText || '' : option.querySelector(`.multi-select-option-col-${col.key}`)?.innerText || ''
+                                typeof col === 'string'
+                                    ? option.querySelector(`.multi-select-option-col-${col}`)?.innerText || ''
+                                    : option.querySelector(`.multi-select-option-col-${col.key}`)?.innerText || ''
                             )
                             .join(' ');
                     } else {
                         text = option.querySelector('.multi-select-option-text').innerHTML;
                     }
-                    option.style.display = text.toLowerCase().indexOf(search.value.toLowerCase()) > -1 ? 'flex' : 'none';
+                    option.style.display = text.toLowerCase().indexOf(search.value.trim().toLowerCase()) > -1 ? 'flex' : 'none';
                 });
             };
         }
@@ -467,7 +524,8 @@ class MultiSelect {
         }
         // Calculate the visible width of the header (excluding padding and border)
         const style = window.getComputedStyle(headerElement);
-        const headerWidth = headerElement.offsetWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) - parseFloat(style.borderLeftWidth) - parseFloat(style.borderRightWidth);
+        const headerWidth =
+            headerElement.offsetWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) - parseFloat(style.borderLeftWidth) - parseFloat(style.borderRightWidth);
 
         // Calculate the total width of all selected option tags
         const headerOptions = headerElement.querySelectorAll('.multi-select-header-option');
@@ -494,7 +552,9 @@ class MultiSelect {
                     if (this.options.multiColumn && this.options.columns.length > 0) {
                         display = this.options.columns
                             .map((col) =>
-                                typeof col === 'string' ? option.querySelector(`.multi-select-option-col-${col}`)?.innerText || '' : option.querySelector(`.multi-select-option-col-${col.key}`)?.innerText || ''
+                                typeof col === 'string'
+                                    ? option.querySelector(`.multi-select-option-col-${col}`)?.innerText || ''
+                                    : option.querySelector(`.multi-select-option-col-${col.key}`)?.innerText || ''
                             )
                             .join(' | ');
                     } else {
@@ -533,28 +593,48 @@ class MultiSelect {
      * @param {Object} newOptions - New options to merge
      */
     _updateOptions(newOptions = {}) {
+        // Validate newOptions
+        if (typeof newOptions !== 'object') {
+            console.error('Invalid options provided. Expected an object.');
+            return;
+        }
+
         // Save previous selected values
         const prevSelected = this.selectedValues ? [...this.selectedValues] : [];
 
         // Merge options
         this.options = Object.assign(this.options, newOptions);
 
-        // If new data is provided, keep selected if possible
-        if (newOptions.data) {
-            this.data = newOptions.data.map((item) => ({
-                ...item,
-                // selected: prevSelected.includes(item.value),
-                selected: false, // Reset selected state to false
-            }));
+        // Validate and update data
+        if (Array.isArray(newOptions.data)) {
+            this.data = newOptions.data.map((item) => {
+                if (!item.value || !item.text) {
+                    console.warn('Invalid data item:', item);
+                    return { value: '', text: '', selected: false };
+                }
+                return {
+                    ...item,
+                    selected: prevSelected.includes(item.value),
+                };
+            });
+        } else if (newOptions.data !== undefined && !Array.isArray(newOptions.data)) {
+            console.error('Invalid data provided. Expected an array.');
+            return; // Dừng việc cập nhật nếu dữ liệu không hợp lệ
         }
 
-        // Re-render component
-        this.element.innerHTML = '';
-        const newElement = this._template();
-        this.element.replaceWith(newElement);
-        this.element = newElement;
+        // Re-render only the options (optimize rendering)
+        const optionsContainer = this.element.querySelector('.multi-select-options');
+        if (optionsContainer) {
+            optionsContainer.innerHTML = this._template().querySelector('.multi-select-options').innerHTML;
+        }
+
+        // Update selected items in the UI
         this._updateSelected();
+
+        // Re-attach event handlers
         this._eventHandlers();
+
+        this._checkState();
     }
 
     /**
@@ -616,6 +696,15 @@ class MultiSelect {
         // Enable search input if exists
         const search = this.element.querySelector('.multi-select-search');
         if (search) search.disabled = false;
+    }
+
+    /**
+     * Check the current state for debugging
+     */
+    _checkState() {
+        console.log('Current options:', this.options);
+        console.log('Current data:', this.data);
+        console.log('Selected values:', this.selectedValues);
     }
 
     // --- Getters and Setters for properties ---
@@ -687,8 +776,6 @@ class MultiSelect {
 // Initialize MultiSelect for all elements with [data-multi-select] attribute
 document.querySelectorAll('[data-multi-select]').forEach((select, index) => {
     multipleSelectionElements[select.id] = {
-        id: index,
-        element: select,
         multipleSelection: new MultiSelect(select, {}),
     };
 });
