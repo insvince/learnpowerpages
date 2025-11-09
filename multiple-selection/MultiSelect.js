@@ -108,12 +108,12 @@ class MultiSelect {
         // Internal state
         this._isDisabled = false;
 
-        // Allow data-* attributes on the select element to override options
-        for (const prop in this.selectElement.dataset) {
-            if (this.options[prop] !== undefined) {
-                this.options[prop] = this.selectElement.dataset[prop];
-            }
-        }
+        // // Allow data-* attributes on the select element to override options
+        // for (const prop in this.selectElement.dataset) {
+        //     if (this.options[prop] !== undefined) {
+        //         this.options[prop] = this.selectElement.dataset[prop];
+        //     }
+        // }
 
         // Set the name for the component (from attribute or generate unique)
         this.name = this.selectElement.getAttribute('name') ? this.selectElement.getAttribute('name') : 'multi-select-' + Math.floor(Math.random() * 1000000);
@@ -278,7 +278,36 @@ class MultiSelect {
                 let selected = true;
                 if (!option.classList.contains('multi-select-selected')) {
                     // Select option
-                    if (this.options.max && this.selectedValues.length >= this.options.max) return;
+                    if (this.options.max && this.selectedValues.length >= this.options.max) {
+                        // If max = 1 → switch to the newly selected option
+                        if (this.options.max === 1) {
+                            // Deselect all currently selected options
+                            this.element.querySelectorAll('.multi-select-option.multi-select-selected').forEach((selectedOption) => {
+                                selectedOption.classList.remove('multi-select-selected');
+                                const value = selectedOption.dataset.value;
+
+                                // Remove hidden input
+                                const hiddenInput = this.element.querySelector(`input[value="${value}"]`);
+                                if (hiddenInput) hiddenInput.remove();
+
+                                // Update data source
+                                const item = this.data.find((d) => d.value == value);
+                                if (item) item.selected = false;
+
+                                // Remove selected item from header
+                                const headerOption = this.element.querySelector(`.multi-select-header-option[data-value="${value}"]`);
+                                if (headerOption) headerOption.remove();
+                            });
+
+                            // Remove summary element (if any)
+                            if (this.element.querySelector('.multi-select-header-more')) {
+                                this.element.querySelector('.multi-select-header-more').remove();
+                            }
+                        } else {
+                            // For other cases (max > 1), prevent selecting more
+                            return;
+                        }
+                    }
                     this.element.querySelector('.multi-select').insertAdjacentHTML('afterbegin', `<input type="hidden" name="${this.name}[]" value="${option.dataset.value}">`);
                     this.data.find((data) => data.value == option.dataset.value).selected = true;
                     option.classList.add('multi-select-selected');
@@ -707,7 +736,7 @@ class MultiSelect {
         console.log('Selected values:', this.selectedValues);
     }
 
-    // --- Getters and Setters for properties ---
+    //#region Getters and Setters for properties
     get selectedValues() {
         return this.data.filter((data) => data.selected).map((data) => data.value);
     }
@@ -771,6 +800,7 @@ class MultiSelect {
     get height() {
         return this.options.height;
     }
+    //#endregion
 }
 
 // Initialize MultiSelect for all elements with [data-multi-select] attribute

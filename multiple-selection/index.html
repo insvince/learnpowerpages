@@ -70,7 +70,7 @@
         </select>
 
         <label for="cars">Car Manufacturers</label>
-        <select id="cars" name="cars" data-placeholder="Select car manufacturers" data-max="2" data-search="false"
+        <select id="cars" name="cars" data-placeholder="Select car manufacturers" data-max="3" data-search="false"
             data-select-all="false" data-width="300px" multiple data-multi-select>
             <option value="Audi">Audi</option>
             <option value="BMW">BMW</option>
@@ -78,8 +78,8 @@
         </select>
 
         <label for="dynamic">Dynamic Select</label>
-        <select id="dynamic" name="dynamic" data-placeholder="Select an option" data-max="2" data-search="true"
-            data-select-all="true" data-width="300px" multiple data-multi-select></select>
+        <select id="dynamic" name="dynamic" data-placeholder="Select an option" data-max="1" data-search="true"
+            data-select-all="true" data-width="300px"></select>
     </form>
     <!-- Include the Multi Select JS class -->
     <script src="MultiSelect.js"></script>
@@ -110,16 +110,41 @@
                     text: 'Option 5'
                 }
             ],
-            onChange: function (value, text, element) { },
-            onSelect: function (value, text, element) { },
-            onUnselect: function (value, text, element) { },
+            onChange: function (value, text, element) {
+                console.log('-----------Change--------');
+                console.log('selectedValues:', value);
+                console.log('selectedItems:', text);
+                console.log('selectedItems:', element);
+                console.log('value: ', value);
+                console.log('\n\n\n\n\n\n');
+            },
+            onSelect: function (value, text, element) {
+                console.log('-----------onSelect--------');
+                console.log('selectedValues:', value);
+                console.log('selectedItems:', text);
+                console.log('selectedItems:', element);
+                console.log('value: ', value);
+                console.log('\n\n\n\n\n\n');
+            },
+            onUnselect: function (value, text, element) {
+                console.log('-----------onUnselect--------');
+                console.log('selectedValues:', value);
+                console.log('selectedItems:', text);
+                console.log('selectedItems:', element);
+                console.log('value: ', value);
+                console.log('\n\n\n\n\n\n');
+            },
             onSelectAll: function (selectedValues, selectedItems) {
+                console.log('-----------onSelectAll--------');
                 console.log('selectedValues:', selectedValues);
                 console.log('selectedItems:', selectedItems);
+                console.log('\n\n\n\n\n\n');
             },
             onUnselectAll: function (selectedValues, selectedItems) {
+                console.log('-----------onUnselectAll--------');
                 console.log('selectedValues:', selectedValues);
                 console.log('selectedItems:', selectedItems);
+                console.log('\n\n\n\n\n\n');
             }
         });
     </script>
